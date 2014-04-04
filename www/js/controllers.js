@@ -4,7 +4,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('profilCtrl', function($scope) {
-
 })
 
 .controller('appareilCtrl', function($scope) {
