@@ -1,10 +1,20 @@
+<?php
+
+$bdd = new PDO('mysql:host=florianlnail.mysql.db;dbname=florianlnail', 'florianlnail', 'bxGUrkTAvqBA');
+$reponse = $bdd->query('SELECT * FROM Utilisateur');
+$donnees = $reponse->fetch();
+
+while ($donnees = $reponse->fetch())
+{
+?>
+
 <ion-view title="Actualité">
     <ion-content class="has-header padding">
         <div class="list card">
 
             <div class="item item-avatar red-cards">
                 <img src="img/doudou.png">
-                <h2>Mathéa Renaudie</h2>
+                <h2><?php echo $donnees['prenom']; ?></h2>
                 <p>Nail'artist pur et dur</p>
             </div>
 
@@ -73,3 +83,8 @@
         <div class="space-tab"></div>
     </ion-content>
 </ion-view>
+
+<?php
+}
+$reponse->closeCursor(); 
+?>
