@@ -16,6 +16,23 @@
       Templates are in the /templates folder (but you could also
       have templates inline in this html file if you'd like).
     -->
+
+    <?php
+
+$reponse = $bdd->query('SELECT * FROM Utilisateur');
+$donnees = $reponse->fetch();
+
+
+    while ($donnees = $reponse->fetch())
+    {
+    ?>
+      <h2><?php echo $donnees['prenom']; ?></h2>
+
+    <?php
+    }
+    $reponse->closeCursor(); 
+    ?>
     <ion-nav-view></ion-nav-view>
+
 
 <?php require_once("footer.php"); ?>
