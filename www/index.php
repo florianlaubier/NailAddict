@@ -1,38 +1,36 @@
-<?php 
-	require_once("header.php");
-	require_once("connexion.php");
+<?php
+  require_once("header.php");
 ?>
 
-	<!-- 
-      The nav bar that will be updated as we navigate between views.
-    -->
-    <ion-nav-bar class="bar-stable nav-title-slide-ios7">
-      <ion-nav-back-button class="button-icon icon ion-chevron-left">
-        Back
-      </ion-nav-back-button>
-    </ion-nav-bar>
-    <!-- 
-      The views will be rendered in the <ion-nav-view> directive below
-      Templates are in the /templates folder (but you could also
-      have templates inline in this html file if you'd like).
-    -->
+<body ng-app="starter" class="padding-vertical">
+  <ion-pane>
 
-    <?php
+    <!-- Cacher pour enlever la bar de titre -->
+    <ion-header-bar class="bar-stable">
+      <h1 class="title">Connexion</h1>
+    </ion-header-bar>
 
-$reponse = $bdd->query('SELECT * FROM Utilisateur');
-$donnees = $reponse->fetch();
+    <ion-content class="index">
 
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Username</span>
+          <input type="text"></label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password"></label>
+      </div>
 
-    while ($donnees = $reponse->fetch())
-    {
-    ?>
-      <h2><?php echo $donnees['prenom']; ?></h2>
+      <button class="button button-block button-positive">Se connecter</button>
 
-    <?php
-    }
-    $reponse->closeCursor(); 
-    ?>
-    <ion-nav-view></ion-nav-view>
+      <button class="button button-block button-calm">S'inscrire</button>
 
+    </ion-content>
 
-<?php require_once("footer.php"); ?>
+  </ion-pane>
+</body>
+
+<?php
+  require_once("nav.php");
+  require_once("footer.php");
+?>

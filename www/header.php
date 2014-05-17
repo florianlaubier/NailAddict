@@ -1,3 +1,7 @@
+<?php
+  require_once("connexion.php");
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -20,7 +24,4 @@
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/services.js"></script>
   </head>
-  <body ng-app="starter" animation="slide-left-right-ios7">
