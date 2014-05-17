@@ -28,7 +28,7 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
       <div class="list card">
 
         <div class="item item-avatar red-cards">
-          <img src="">
+          <img src=<?php echo '"', $util['lien_photo'], '"'; ?>>
           <h2><?php echo $util['pseudo']; ?></h2>
           <p>Nail'artist pur et dur</p>
         </div>

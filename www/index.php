@@ -12,7 +12,9 @@
 
     <ion-content class="index">
 
+
       <div class="list">
+        <img src="img/nail.png">
         <label class="item item-input">
           <span class="input-label">Username</span>
           <input type="text"></label>
@@ -25,6 +27,7 @@
 
       <button class="button button-block button-calm">S'inscrire</button>
 
+      <div class="space-tab"></div>
     </ion-content>
 
   </ion-pane>

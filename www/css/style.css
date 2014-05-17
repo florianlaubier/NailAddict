@@ -1,6 +1,12 @@
 /* Index */
 .index{
     padding: 10px;
+    margin: 0 auto;
+    text-align:center;
+}
+
+.index img{
+    width: 70%;
 }
 
 /* Couleurs du menu */
@@ -22,7 +28,7 @@
 
 /* position des cards dans actualité */
 .space-tab{
-    height: 40px;
+    height: 60px;
 }
 
 /* Couleurs arrière plan cards*/
