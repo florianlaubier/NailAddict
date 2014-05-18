@@ -7,22 +7,23 @@
     ?> -->
 
 
-<!-- Mathéa -->
+<!-- Mathéa 
     <?php
         $config['host'] = '127.0.0.1:82';
         $config['dbname'] = 'nail';
         $config['user'] = 'mathou';
         $config['pass'] = 'root';
     ?>
+-->
 
-<!-- Coralie
+<!-- Coralie -->
     <?php
-        $config['host'] = 'localhost';
+        $config['host'] = '127.0.0.1:8080';
         $config['dbname'] = 'nail';
         $config['user'] = 'root';
         $config['pass'] = '';
     ?>
--->
+
 
 <?php
     $bdd_server = $config['host'];

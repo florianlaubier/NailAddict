@@ -1,14 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.5
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Sam 17 Mai 2014 à 20:11
--- Version du serveur: 5.5.29
--- Version de PHP: 5.4.10
+-- Généré le: Dim 18 Mai 2014 à 20:43
+-- Version du serveur: 5.5.24-log
+-- Version de PHP: 5.4.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de données: `nail`
@@ -17,22 +23,32 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Collection`
+-- Structure de la table `collection`
 --
 
-CREATE TABLE `Collection` (
+CREATE TABLE IF NOT EXISTS `collection` (
   `id_user` int(11) NOT NULL,
   `id_vernis` int(11) NOT NULL,
-  UNIQUE KEY `id_user` (`id_user`)
+  KEY `id_user` (`id_user`),
+  KEY `id_vernis` (`id_vernis`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `collection`
+--
+
+INSERT INTO `collection` (`id_user`, `id_vernis`) VALUES
+(2, 2),
+(2, 3),
+(2, 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Localisation`
+-- Structure de la table `localisation`
 --
 
-CREATE TABLE `Localisation` (
+CREATE TABLE IF NOT EXISTS `localisation` (
   `id_localisation` int(11) NOT NULL AUTO_INCREMENT,
   `ville` varchar(50) NOT NULL,
   `pays` varchar(50) NOT NULL,
@@ -40,34 +56,42 @@ CREATE TABLE `Localisation` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Contenu de la table `Localisation`
+-- Contenu de la table `localisation`
 --
 
-INSERT INTO `Localisation` (`id_localisation`, `ville`, `pays`) VALUES
+INSERT INTO `localisation` (`id_localisation`, `ville`, `pays`) VALUES
 (1, 'Bordeaux', 'France');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Magasin`
+-- Structure de la table `magasin`
 --
 
-CREATE TABLE `Magasin` (
+CREATE TABLE IF NOT EXISTS `magasin` (
   `id_magasin` int(11) NOT NULL AUTO_INCREMENT,
   `nom_magasin` varchar(100) NOT NULL,
   `url` varchar(100) DEFAULT NULL,
   `id_localisation_magasin` int(11) NOT NULL,
   PRIMARY KEY (`id_magasin`),
-  UNIQUE KEY `id_localisation_magasin` (`id_localisation_magasin`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `id_localisation_magasin` (`id_localisation_magasin`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `magasin`
+--
+
+INSERT INTO `magasin` (`id_magasin`, `nom_magasin`, `url`, `id_localisation_magasin`) VALUES
+(1, 'Kiko', 'http://www.kikocosmetics.fr/', 1),
+(2, 'Sephora', 'http://www.sephora.fr/', 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Media`
+-- Structure de la table `media`
 --
 
-CREATE TABLE `Media` (
+CREATE TABLE IF NOT EXISTS `media` (
   `id_media` int(11) NOT NULL AUTO_INCREMENT,
   `lien_media` varchar(200) NOT NULL,
   `type` enum('video','photo') DEFAULT NULL,
@@ -78,87 +102,112 @@ CREATE TABLE `Media` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Prix`
+-- Structure de la table `prix`
 --
 
-CREATE TABLE `Prix` (
+CREATE TABLE IF NOT EXISTS `prix` (
   `id_prix` int(11) NOT NULL AUTO_INCREMENT,
   `valeur` float NOT NULL,
   `devise` enum('€','$') NOT NULL DEFAULT '€',
   PRIMARY KEY (`id_prix`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `prix`
+--
+
+INSERT INTO `prix` (`id_prix`, `valeur`, `devise`) VALUES
+(1, 3.5, '€'),
+(2, 4.5, '€');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Utilisateur`
+-- Structure de la table `utilisateur`
 --
 
-CREATE TABLE `Utilisateur` (
+CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
   `pseudo` varchar(30) NOT NULL,
+  `mot_de_passe` varchar(50) NOT NULL,
   `date_naissance` date DEFAULT NULL,
   `lien_photo` varchar(200) DEFAULT NULL,
   `description_user` varchar(300) DEFAULT NULL,
   `id_localisation_user` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_user`),
   KEY `id_localisation_user` (`id_localisation_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Contenu de la table `Utilisateur`
+-- Contenu de la table `utilisateur`
 --
 
-INSERT INTO `Utilisateur` (`id_user`, `nom`, `prenom`, `pseudo`, `date_naissance`, `lien_photo`, `description_user`, `id_localisation_user`) VALUES
-(1, 'RENAUDIE', 'Mathéa', 'Mathou', '1993-04-29', 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-prn1/t1.0-9/1545992_697240656993559_659707393_n.jpg', NULL, 1);
+INSERT INTO `utilisateur` (`id_user`, `nom`, `prenom`, `pseudo`, `mot_de_passe`, `date_naissance`, `lien_photo`, `description_user`, `id_localisation_user`) VALUES
+(1, 'RENAUDIE', 'Mathéa', 'Mathou', '', '1993-04-29', 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-prn1/t1.0-9/1545992_697240656993559_659707393_n.jpg', NULL, 1),
+(2, 'Ruiz', 'Coralie', 'Coco', 'coco64', '1991-08-23', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Vernis`
+-- Structure de la table `vernis`
 --
 
-CREATE TABLE `Vernis` (
+CREATE TABLE IF NOT EXISTS `vernis` (
   `id_vernis` int(11) NOT NULL AUTO_INCREMENT,
   `marque` varchar(50) NOT NULL,
   `texture` varchar(50) NOT NULL,
   `couleur` varchar(50) NOT NULL,
   `reference` varchar(50) NOT NULL,
   `avis` varchar(300) NOT NULL,
+  `lien_vernis` varchar(200) NOT NULL,
   `id_prix_vernis` int(11) NOT NULL,
   `id_magasin_vernis` int(11) NOT NULL,
   PRIMARY KEY (`id_vernis`),
-  UNIQUE KEY `id_prix_vernis` (`id_prix_vernis`),
-  UNIQUE KEY `id_magasin_vernis` (`id_magasin_vernis`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `id_prix_vernis` (`id_prix_vernis`),
+  KEY `id_magasin_vernis` (`id_magasin_vernis`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Contenu de la table `vernis`
+--
+
+INSERT INTO `vernis` (`id_vernis`, `marque`, `texture`, `couleur`, `reference`, `avis`, `lien_vernis`, `id_prix_vernis`, `id_magasin_vernis`) VALUES
+(1, 'Kiko', 'Normale', 'Emeraude', '', '', 'http://img11.hostingpics.net/pics/728092vernisemeraude.png', 1, 1),
+(2, 'Kiko', 'Normale', 'Miror', '', '', 'http://img11.hostingpics.net/pics/359698vernismirror.png', 2, 1),
+(3, 'Kiko', 'Lacquer', 'Violet', '', '', 'http://img11.hostingpics.net/pics/476170verniskikonaillacquerviolet.png', 2, 1);
 
 --
 -- Contraintes pour les tables exportées
 --
 
 --
--- Contraintes pour la table `Collection`
+-- Contraintes pour la table `collection`
 --
-ALTER TABLE `Collection`
-  ADD CONSTRAINT `contrainte_utilisateur_vernis` FOREIGN KEY (`id_user`) REFERENCES `Utilisateur` (`id_user`);
+ALTER TABLE `collection`
+  ADD CONSTRAINT `collection_ibfk_1` FOREIGN KEY (`id_vernis`) REFERENCES `vernis` (`id_vernis`),
+  ADD CONSTRAINT `contrainte_utilisateur_vernis` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`);
 
 --
--- Contraintes pour la table `Magasin`
+-- Contraintes pour la table `magasin`
 --
-ALTER TABLE `Magasin`
-  ADD CONSTRAINT `contrainte_magasin_localisation` FOREIGN KEY (`id_localisation_magasin`) REFERENCES `Localisation` (`id_localisation`);
+ALTER TABLE `magasin`
+  ADD CONSTRAINT `contrainte_magasin_localisation` FOREIGN KEY (`id_localisation_magasin`) REFERENCES `localisation` (`id_localisation`);
 
 --
--- Contraintes pour la table `Utilisateur`
+-- Contraintes pour la table `utilisateur`
 --
-ALTER TABLE `Utilisateur`
-  ADD CONSTRAINT `contrainte_utilisateur_localisation` FOREIGN KEY (`id_localisation_user`) REFERENCES `Localisation` (`id_localisation`);
+ALTER TABLE `utilisateur`
+  ADD CONSTRAINT `contrainte_utilisateur_localisation` FOREIGN KEY (`id_localisation_user`) REFERENCES `localisation` (`id_localisation`);
 
 --
--- Contraintes pour la table `Vernis`
+-- Contraintes pour la table `vernis`
 --
-ALTER TABLE `Vernis`
-  ADD CONSTRAINT `contrainte_magasin_vernis` FOREIGN KEY (`id_magasin_vernis`) REFERENCES `Magasin` (`id_magasin`),
-  ADD CONSTRAINT `contrainte_vernis_prix` FOREIGN KEY (`id_prix_vernis`) REFERENCES `Prix` (`id_prix`);
+ALTER TABLE `vernis`
+  ADD CONSTRAINT `contrainte_magasin_vernis` FOREIGN KEY (`id_magasin_vernis`) REFERENCES `magasin` (`id_magasin`),
+  ADD CONSTRAINT `contrainte_vernis_prix` FOREIGN KEY (`id_prix_vernis`) REFERENCES `prix` (`id_prix`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

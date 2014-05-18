@@ -2,7 +2,7 @@
   require_once("header.php");
 ?>
 
-<body ng-app="starter" class="padding-vertical">
+ <body ng-app="starter" class="padding-vertical">
   <ion-pane>
 
     <!-- Cacher pour enlever la bar de titre -->
@@ -12,7 +12,8 @@
 
     <ion-content class="index">
 
-    <div class="list">
+
+      <div class="list">
         <img src="img/nail.png">
         <form id="connectForm">
           <label class="item item-input">
@@ -23,19 +24,16 @@
             <input id="password" name="password" type="password" >
           </label>
      
-          <input type="button" id="submitButton" class="button button-block button-positive" value="Se connecter "/>
+        <button id="submitButton" class="button button-block button-positive" >Se connecter</button>
         </form>
         <button id="registerButton" class="button button-block button-calm" >S'inscrire</button>
         <div id="resultatConnexionUser"></div>
 
        </div>
       <div class="space-tab"></div>
-
-        
       </ion-content>
-
-  </ion-pane>
-</body>
+    </ion-pane>
+  </body>
 
 <?php
   require_once("footer.php");
