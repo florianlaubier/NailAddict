@@ -16,7 +16,7 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
   <ion-pane>
 
   <ion-header-bar class="bar-stable">
-  <h1 class="title">Profil</h1>
+  <h1 class="title">Ma collection</h1>
 </ion-header-bar>
 
 <ion-content>
@@ -35,38 +35,40 @@ while($util = mysql_fetch_array($All_util))
 
     <div class="item">
       <a href="vue-collection.php">
-        <img class="menu_profil" alt="Voir ma collection" src="img/ongle.png">
+        <img class="menu_profil" src="img/ongle.png">
       </a>
       <a href="vue-media.php">
-        <img class="menu_profil" alt="Voir mes photos" src="img/ongle.png">
+        <img class="menu_profil" src="img/ongle.png">
       </a>
       <a href="vue-tuto.php">
-        <img class="menu_profil" alt="Voir mes tutoriels" src="img/ongle.png">
+        <img class="menu_profil" src="img/ongle.png">
       </a>
       <a href="vue-parametres.php">
-        <img class="menu_profil" alt="Paramètres" src="img/ongle.png">
+        <img class="menu_profil" src="img/ongle.png">
       </a>
     </div>
 
     <div class="item item-body ">
-      <img class="full-image" src="img/ongle.png">
-      <p></p>
-      <p>
-        <a href="#" class="subdued">1 Like</a>
-        <a href="#" class="subdued">5 Comments</a>
-      </p>
-    </div>
-
-    <div class="item tabs tabs-secondary tabs-icon">
-      <a class="tab-item" href="#"> <i class="icon ion-thumbsup"></i>
-        Like
+      <a href="vue-vernis.php">
+        <img class="miniature" src="img/vernis1.png">
       </a>
-      <a class="tab-item" href="#"> <i class="icon ion-chatbox"></i>
-        Comment
+      <a href="vue-vernis.php">
+        <img class="miniature" src="img/vernis1.png">
       </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-share"></i>
-        Share
+      <a href="vue-vernis.php">
+        <img class="miniature" src="img/vernis1.png">
+      </a>
+      <a href="vue-vernis.php">
+        <img class="miniature" src="img/vernis1.png">
+      </a>
+      <a href="vue-vernis.php">
+        <img class="miniature" src="img/vernis1.png">
+      </a>
+      <a href="vue-vernis.php">
+        <img class="miniature" src="img/vernis1.png">
+      </a>
+      <a href="vue-vernis.php">
+        <i class="icon ion-ios7-plus custom-plus"></i>
       </a>
     </div>
 

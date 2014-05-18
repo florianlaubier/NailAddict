@@ -7,7 +7,7 @@ require_once("connexion.php");
 mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
 mysql_select_db($bdd_name) or die(mysql_error());
 
-$query='SELECT * FROM  `Utilisateur`';
+$query='SELECT * FROM  `vernis`';
 $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
 ?>
 
@@ -15,42 +15,48 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
 <body ng-app="starter">
   <ion-pane>
 
-  <ion-header-bar class="bar-stable">
-  <h1 class="title">Profil</h1>
-</ion-header-bar>
-
-<ion-content>
-
 <?php
 while($util = mysql_fetch_array($All_util))
 {
   ?>
 
+  <ion-header-bar class="bar-stable">
+  <h1 class="title"><?php echo $util['marque'], " ", $util['reference']  ; ?></h1>
+</ion-header-bar>
+
+<ion-content>
+
   <div class="list card">
 
     <div class="item item-avatar">
-      <img src=<?php echo '"', $util['lien_photo'], '"'; ?>>
-      <h2><?php echo $util['pseudo']; ?></h2>
+      <img src="img/doudou.png">
+      <h2>Mathou</h2>
     </div>
 
     <div class="item">
       <a href="vue-collection.php">
-        <img class="menu_profil" alt="Voir ma collection" src="img/ongle.png">
+        <img class="menu_profil" src="img/ongle.png">
       </a>
       <a href="vue-media.php">
-        <img class="menu_profil" alt="Voir mes photos" src="img/ongle.png">
+        <img class="menu_profil" src="img/ongle.png">
       </a>
       <a href="vue-tuto.php">
-        <img class="menu_profil" alt="Voir mes tutoriels" src="img/ongle.png">
+        <img class="menu_profil" src="img/ongle.png">
       </a>
       <a href="vue-parametres.php">
-        <img class="menu_profil" alt="Paramètres" src="img/ongle.png">
+        <img class="menu_profil" src="img/ongle.png">
       </a>
     </div>
 
     <div class="item item-body ">
-      <img class="full-image" src="img/ongle.png">
-      <p></p>
+      <img class="full-image" src="img/vernis1.png">
+      <p>Marque : <?php echo $util['marque']; ?></p>
+      <p>Texture : <?php echo $util['texture']; ?></p>
+      <p>Couleur : <?php echo $util['couleur']; ?></p>
+      <p>Référence : <?php echo $util['reference']; ?></p>
+      <p>Avis : <?php echo $util['avis']; ?></p>
+      <p>Prix : <?php echo $util['id_prix_vernis']; ?></p>
+      <p>Magasin : <?php echo $util['id_magasin_vernis']; ?></p>
       <p>
         <a href="#" class="subdued">1 Like</a>
         <a href="#" class="subdued">5 Comments</a>
