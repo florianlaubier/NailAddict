@@ -1,3 +1,8 @@
+/* General */
+a {
+  text-decoration: none;
+}
+
 /* Index */
 .index{
     padding: 10px;
@@ -54,4 +59,19 @@ background: -ms-linear-gradient(top,  #ff8989 0%,#f45555 40%,#f41707 100%); /* I
 background: linear-gradient(to bottom,  #ff8989 0%,#f45555 40%,#f41707 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8989', endColorstr='#f41707',GradientType=0 ); /* IE6-9 */
 
+}
+
+/* Page profil */
+.menu_profil {
+  float: left;
+  margin-right: 5%;
+  width: 20%;
+}
+
+/* Page avec des miniatures d'images */
+.miniature {
+  float: left;
+  margin-right: 5%;
+  width: 20%;
+  margin-top: 5%;
 }

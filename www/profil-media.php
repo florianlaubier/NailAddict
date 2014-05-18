@@ -16,7 +16,7 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
   <ion-pane>
 
   <ion-header-bar class="bar-stable">
-  <h1 class="title">Profil</h1>
+  <h1 class="title">Mes photos</h1>
 </ion-header-bar>
 
 <ion-content>
@@ -33,27 +33,32 @@ while($util = mysql_fetch_array($All_util))
       <h2><?php echo $util['pseudo']; ?></h2>
     </div>
 
-    <?php require_once("nav-profil.php"); ?>
+    <?php require_once("nav-profil.php");  ?>
 
     <div class="item item-body ">
-      <img class="full-image" src="img/ongle.png">
-      <p></p>
-      <p>
-        <a href="#" class="subdued">1 Like</a>
-        <a href="#" class="subdued">5 Comments</a>
-      </p>
-    </div>
-
-    <div class="item tabs tabs-secondary tabs-icon">
-      <a class="tab-item" href="#"> <i class="icon ion-thumbsup"></i>
-        Like
+      <a href="detail-photo.php">
+        <img class="miniature" src="img/ongle.png">
       </a>
-      <a class="tab-item" href="#"> <i class="icon ion-chatbox"></i>
-        Comment
+      <a href="detail-photo.php">
+        <img class="miniature" src="img/ongle.png">
       </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-share"></i>
-        Share
+      <a href="detail-photo.php">
+        <img class="miniature" src="img/ongle.png">
+      </a>
+      <a href="detail-photo.php">
+        <img class="miniature" src="img/ongle.png">
+      </a>
+      <a href="detail-photo.php">
+        <img class="miniature" src="img/ongle.png">
+      </a>
+      <a href="detail-photo.php">
+        <img class="miniature" src="img/ongle.png">
+      </a>
+      <a href="detail-photo.php">
+        <img class="miniature" src="img/ongle.png">
+      </a>
+      <a href="detail-photo.php">
+        <img class="miniature" src="img/ongle.png">
       </a>
     </div>
 

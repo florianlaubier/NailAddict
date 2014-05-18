@@ -16,7 +16,7 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
   <ion-pane>
 
     <ion-header-bar class="bar-stable">
-      <h1 class="title">Appareil</h1>
+      <h1 class="title">Actualité</h1>
     </ion-header-bar>
 
     <ion-content>
