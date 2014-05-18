@@ -1,7 +1,3 @@
-<?php
-  require_once("connexion.php");
-?>
-
 <!DOCTYPE html>
 <html>
   <head>
