@@ -33,44 +33,31 @@ while($util = mysql_fetch_array($All_util))
       <h2><?php echo $util['pseudo']; ?></h2>
     </div>
 
-    <div class="item">
-      <a href="vue-collection.php">
-        <img class="menu_profil" src="img/ongle.png">
-      </a>
-      <a href="vue-media.php">
-        <img class="menu_profil" src="img/ongle.png">
-      </a>
-      <a href="vue-tuto.php">
-        <img class="menu_profil" src="img/ongle.png">
-      </a>
-      <a href="vue-parametres.php">
-        <img class="menu_profil" src="img/ongle.png">
-      </a>
-    </div>
+    <?php require_once("nav-profil.php");  ?>
 
     <div class="item item-body ">
-      <a href="vue-photo.php">
+      <a href="detail-photo.php">
         <img class="miniature" src="img/ongle.png">
       </a>
-      <a href="vue-photo.php">
+      <a href="detail-photo.php">
         <img class="miniature" src="img/ongle.png">
       </a>
-      <a href="vue-photo.php">
+      <a href="detail-photo.php">
         <img class="miniature" src="img/ongle.png">
       </a>
-      <a href="vue-photo.php">
+      <a href="detail-photo.php">
         <img class="miniature" src="img/ongle.png">
       </a>
-      <a href="vue-photo.php">
+      <a href="detail-photo.php">
         <img class="miniature" src="img/ongle.png">
       </a>
-      <a href="vue-photo.php">
+      <a href="detail-photo.php">
         <img class="miniature" src="img/ongle.png">
       </a>
-      <a href="vue-photo.php">
+      <a href="detail-photo.php">
         <img class="miniature" src="img/ongle.png">
       </a>
-      <a href="vue-photo.php">
+      <a href="detail-photo.php">
         <img class="miniature" src="img/ongle.png">
       </a>
     </div>

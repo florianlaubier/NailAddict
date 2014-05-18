@@ -33,20 +33,7 @@ while($util = mysql_fetch_array($All_util))
       <h2><?php echo $util['pseudo']; ?></h2>
     </div>
 
-    <div class="item">
-      <a href="vue-collection.php">
-        <img class="menu_profil" alt="Voir ma collection" src="img/ongle.png">
-      </a>
-      <a href="vue-media.php">
-        <img class="menu_profil" alt="Voir mes photos" src="img/ongle.png">
-      </a>
-      <a href="vue-tuto.php">
-        <img class="menu_profil" alt="Voir mes tutoriels" src="img/ongle.png">
-      </a>
-      <a href="vue-parametres.php">
-        <img class="menu_profil" alt="Paramètres" src="img/ongle.png">
-      </a>
-    </div>
+    <?php require_once("nav-profil.php"); ?>
 
     <div class="item item-body ">
       <img class="full-image" src="img/ongle.png">

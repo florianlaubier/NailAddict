@@ -28,6 +28,8 @@ while($util = mysql_fetch_array($All_util))
 
   <div class="list card">
 
+    <?php require_once("nav-profil.php");  ?>
+
     <div class="item">
       <a href="vue-parametres.php#informations">
         <p>Modifier mes informations</p>

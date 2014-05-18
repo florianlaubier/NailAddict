@@ -14,6 +14,8 @@ require_once("connexion.php");
 
   <div class="list card">
 
+  	<?php require_once("nav-profil.php");  ?>
+
     <div class="item item-body ">
       <p>Page non disponible pour l'instant.</p>
     </div>
