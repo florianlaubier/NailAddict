@@ -8,6 +8,7 @@ $(document).ready(function(){
               inpPass : $("#password").val()
           },
           function(data){
+
               console.log(data);
 
               if(data.authOK)
