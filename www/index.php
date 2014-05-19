@@ -24,9 +24,10 @@
           <input id="password" name="password" type="password"></label>
       </div>
 
-      <button id="submitButton" class="button button-block button-positive">Se connecter</button>
       <div id="resultatConnexionUser"></div>
-      <button class="button button-block button-calm">S'inscrire</button>
+      <button id="submitButton" class="button button-block button-positive">Se connecter</button>
+
+      <button id="BtnGoInscrip" class="button button-block button-calm">S'inscrire</button>
 
       <div class="space-tab"></div>
     </ion-content>

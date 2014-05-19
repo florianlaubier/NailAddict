@@ -40,8 +40,14 @@ $(document).ready(function(){
           }, "json");
   });
 
+  //redirection vers la page de connexion
   $('#recoBtn').click(function(){
       window.location.href = 'index.php';
+  });
+
+  // redirection vers l'inscription
+  $('#BtnGoInscrip').click(function(){
+      window.location.href = 'detail-inscription.php';
   });
 
 });
