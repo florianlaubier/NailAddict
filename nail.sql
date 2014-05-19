@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 4.1.6
 -- http://www.phpmyadmin.net
 --
--- Client: localhost
--- Généré le: Dim 18 Mai 2014 à 20:43
--- Version du serveur: 5.5.24-log
--- Version de PHP: 5.4.3
+-- Client :  127.0.0.1
+-- Généré le :  Lun 19 Mai 2014 à 23:42
+-- Version du serveur :  5.6.16
+-- Version de PHP :  5.5.9
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données: `nail`
+-- Base de données :  `nail`
 --
 
 -- --------------------------------------------------------
@@ -96,8 +96,19 @@ CREATE TABLE IF NOT EXISTS `media` (
   `lien_media` varchar(200) NOT NULL,
   `type` enum('video','photo') DEFAULT NULL,
   `description_media` varchar(300) NOT NULL,
-  PRIMARY KEY (`id_media`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date_creation` date DEFAULT NULL,
+  `id_user` int(11) NOT NULL,
+  PRIMARY KEY (`id_media`),
+  KEY `id_user` (`id_user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `media`
+--
+
+INSERT INTO `media` (`id_media`, `lien_media`, `type`, `description_media`, `date_creation`, `id_user`) VALUES
+(1, 'http://onglesdecoration.com/wp-content/uploads/2013/09/dessin-deco-ongles-nail-art-ourse-panda-simple.png', 'photo', 'PAnda Nails! :)', '2014-05-19', 3),
+(2, 'http://1.1.1.5/bmi/media.meltyfashion.fr/article-1355416-ajust_930/a-chaque-ongle-son-sticker-rad-nail-pour.jpg', NULL, 'Boumchaka!!', '2014-05-13', 2);
 
 -- --------------------------------------------------------
 
@@ -138,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id_localisation_user` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_user`),
   KEY `id_localisation_user` (`id_localisation_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `utilisateur`
@@ -146,7 +157,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 
 INSERT INTO `utilisateur` (`id_user`, `nom`, `prenom`, `pseudo`, `mot_de_passe`, `date_naissance`, `lien_photo`, `description_user`, `id_localisation_user`) VALUES
 (1, 'RENAUDIE', 'Mathéa', 'Mathou', '', '1993-04-29', 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-prn1/t1.0-9/1545992_697240656993559_659707393_n.jpg', NULL, 1),
-(2, 'Ruiz', 'Coralie', 'Coco', 'coco64', '1991-08-23', NULL, NULL, 1);
+(2, 'Ruiz', 'Coralie', 'Coco', 'coco64', '1991-08-23', NULL, NULL, 1),
+(3, 'Gourp', 'Clémentine', 'cliky', '123', '1991-09-30', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -164,6 +176,7 @@ CREATE TABLE IF NOT EXISTS `vernis` (
   `lien_vernis` varchar(200) NOT NULL,
   `id_prix_vernis` int(11) NOT NULL,
   `id_magasin_vernis` int(11) NOT NULL,
+  `date_creation` date NOT NULL,
   PRIMARY KEY (`id_vernis`),
   KEY `id_prix_vernis` (`id_prix_vernis`),
   KEY `id_magasin_vernis` (`id_magasin_vernis`)
@@ -173,10 +186,10 @@ CREATE TABLE IF NOT EXISTS `vernis` (
 -- Contenu de la table `vernis`
 --
 
-INSERT INTO `vernis` (`id_vernis`, `marque`, `texture`, `couleur`, `reference`, `avis`, `lien_vernis`, `id_prix_vernis`, `id_magasin_vernis`) VALUES
-(1, 'Kiko', 'Normale', 'Emeraude', '', '', 'http://img11.hostingpics.net/pics/728092vernisemeraude.png', 1, 1),
-(2, 'Kiko', 'Normale', 'Miror', '', '', 'http://img11.hostingpics.net/pics/359698vernismirror.png', 2, 1),
-(3, 'Kiko', 'Lacquer', 'Violet', '', '', 'http://img11.hostingpics.net/pics/476170verniskikonaillacquerviolet.png', 2, 1);
+INSERT INTO `vernis` (`id_vernis`, `marque`, `texture`, `couleur`, `reference`, `avis`, `lien_vernis`, `id_prix_vernis`, `id_magasin_vernis`, `date_creation`) VALUES
+(1, 'Kiko', 'Normale', 'Emeraude', '', '', 'http://img11.hostingpics.net/pics/728092vernisemeraude.png', 1, 1, '0000-00-00'),
+(2, 'Kiko', 'Normale', 'Miror', '', '', 'http://img11.hostingpics.net/pics/359698vernismirror.png', 2, 1, '0000-00-00'),
+(3, 'Kiko', 'Lacquer', 'Violet', '', '', 'http://img11.hostingpics.net/pics/476170verniskikonaillacquerviolet.png', 2, 1, '0000-00-00');
 
 --
 -- Contraintes pour les tables exportées
@@ -194,6 +207,12 @@ ALTER TABLE `collection`
 --
 ALTER TABLE `magasin`
   ADD CONSTRAINT `contrainte_magasin_localisation` FOREIGN KEY (`id_localisation_magasin`) REFERENCES `localisation` (`id_localisation`);
+
+--
+-- Contraintes pour la table `media`
+--
+ALTER TABLE `media`
+  ADD CONSTRAINT `media_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`);
 
 --
 -- Contraintes pour la table `utilisateur`

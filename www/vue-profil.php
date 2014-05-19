@@ -1,18 +1,20 @@
 <?php
 require_once("header.php");
 require_once("connexion.php");
+session_start();
 ?>
 
 <?php
 mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
 mysql_select_db($bdd_name) or die(mysql_error());
 
-$query='SELECT * FROM  `utilisateur`';
+$user_id = $_SESSION['user']['id_user'];
+echo $user_id;
+$query="SELECT * FROM  media WHERE id_user = $user_id ORDER BY date_creation";
 $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
 
 session_start();
 ?>
-
 
 <body ng-app="starter">
   <ion-pane>
@@ -24,25 +26,30 @@ session_start();
 <ion-content>
 
 <?php
-
+  print_r($_SESSION['user']['pseudo']);
     $isAuthOK = isset($_SESSION["user"]) && !empty($_SESSION["user"]);
 if ($isAuthOK) {
-
-while($util = mysql_fetch_array($All_util))
-{
   ?>
-
   <div class="list card">
 
     <div class="item item-avatar">
-      <img src=<?php echo '"', $util['lien_photo'], '"'; ?>>
-      <h2><?php echo $util['pseudo']; ?></h2>
+      <?php
+        if($_SESSION['user']['lien_photo']!=null)
+          {?>
+      <img src=<?php echo '"', $_SESSION['user']['lien_photo'], '"'; ?>>
+      <?php } ?>
+      <h2><?php echo $_SESSION["user"]['pseudo']; ?></h2>
     </div>
 
     <?php require_once("nav-profil.php"); ?>
 
+<?php
+while($util = mysql_fetch_array($All_util))
+{
+  ?>
+
     <div class="item item-body ">
-      <img class="full-image" src="img/ongle.png">
+      <img class="full-image" src="<?php echo $util['lien_media']; ?>">
       <p></p>
       <p>
         <a href="#" class="subdued">1 Like</a>

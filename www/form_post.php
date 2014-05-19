@@ -17,7 +17,7 @@ if($username != "" && $pwd != "")
     if($user_found['mot_de_passe']==$pwd && $user_found['mot_de_passe'] != "" )
     {
         session_start();
-        $_SESSION['user'] = $username;
+        $_SESSION['user'] = $user_found;
         $test = $user_found['mot_de_passe'];
 
         echo json_encode(array("value"=>"Success"));

@@ -1,13 +1,17 @@
 <?php
 require_once("header.php");
 require_once("connexion.php");
+session_start();
 ?>
 
 <?php
 mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
 mysql_select_db($bdd_name) or die(mysql_error());
 
-$query='SELECT * FROM  `utilisateur`';
+$user_id = $_SESSION['user']['id_user'];
+echo $user_id;
+$query="SELECT * FROM utilisateur WHERE id_user = $user_id";
+
 $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
 ?>
 
@@ -63,6 +67,8 @@ while($util = mysql_fetch_array($All_util))
           <p> Changer ma photo de profil :
             <input value="<?php echo $util['lien_photo']; ?>"></input>
           </p>
+
+          <button id="enregistrerBtn" class="button button-block button-royal">Enregistrer </button>
         </fieldset>
     </div>
 

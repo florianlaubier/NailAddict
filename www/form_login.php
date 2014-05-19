@@ -35,7 +35,7 @@ if ($isPostedDataOK) {
     $user_found = mysql_fetch_assoc($result);
 
     if ( $username == $user_found['pseudo'] && $_POST['inpPass'] == $user_found['mot_de_passe']) {
-        $_SESSION["user"] = $_POST['inpLogin']; // on initialise la variable de session
+        $_SESSION["user"] = $user_found ;// on initialise la variable de session
         $retour["authOK"] = true; // on met a true cette variable, elle sera utilisé par angular
     }
 }

@@ -1,6 +1,6 @@
 <div class="item">
   <a href="profil-collection.php">
-    <img class="menu_profil" alt="Voir ma collection" src="img/ongle.png">
+    <img class="menu_profil" alt="Voir ma collection" src="img/vernis1.png">
   </a>
   <a href="profil-media.php">
     <img class="menu_profil" alt="Voir mes photos" src="img/ongle.png">
