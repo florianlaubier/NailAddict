@@ -8,6 +8,7 @@ $(document).ready(function(){
               password : $("#password").val()
           },
           function(data){
+
               console.log(data);
 
               if(data.value == 'Success')
