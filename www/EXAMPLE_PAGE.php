@@ -28,6 +28,33 @@ session_start();
           if ($isAuthOK) {
             ?>
               <p>Tu es bien connecté</p>
+               <!--
+            ,,
+            db
+
+          `7MM  `7MMpMMMb.  ,pP"Ybd  .gP"Ya `7Mb,od8 .gP"Ya `7Mb,od8
+            MM    MM    MM  8I   `" ,M'   Yb  MM' "',M'   Yb  MM' "'
+            MM    MM    MM  `YMMMa. 8M""""""  MM    8M""""""  MM
+            MM    MM    MM  L.   I8 YM.    ,  MM    YM.    ,  MM
+          .JMML..JMML  JMML.M9mmmP'  `Mbmmd'.JMML.   `Mbmmd'.JMML.
+
+                                     mm
+                                     MM
+         ,p6"bo   ,pW"Wq.`7MMpMMMb.mmMMmm .gP"Ya `7MMpMMMb.`7MM  `7MM
+        6M'  OO  6W'   `Wb MM    MM  MM  ,M'   Yb  MM    MM  MM    MM
+        8M       8M     M8 MM    MM  MM  8M""""""  MM    MM  MM    MM
+        YM.    , YA.   ,A9 MM    MM  MM  YM.    ,  MM    MM  MM    MM
+         YMbmd'   `Ybmd9'.JMML  JMML.`Mbmo`Mbmmd'.JMML  JMML.`Mbod"YML.
+
+                                 ,,           ,,
+                                db           db
+
+                              `7MM  ,p6"bo `7MM
+                                MM 6M'  OO   MM
+                                MM 8M        MM
+                                MM YM.    ,  MM
+                              .JMML.YMbmd' .JMML.
+-->
             <?php
           } else {
               ?>

@@ -9,8 +9,9 @@ mysql_select_db($bdd_name) or die(mysql_error());
 
 $query='SELECT * FROM  `utilisateur`';
 $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
-?>
 
+session_start();
+?>
 
 <body ng-app="starter">
   <ion-pane>
@@ -22,6 +23,9 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
     <ion-content>
 
     <?php
+    $isAuthOK = isset($_SESSION["user"]) && !empty($_SESSION["user"]);
+    if ($isAuthOK) {
+
     while($util = mysql_fetch_array($All_util))
     {
     ?>
@@ -62,6 +66,21 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
     };
     ?>
 
+      <div class="space-tab"></div>
+
+
+  <?php
+} else {
+    // sinon on redirige l'utilisateur n'est pas authentifié
+    ?>
+    <div class="padCustom">
+      <button id="recoBtn" class="button button-block button-royal">
+        Veuillez vous identifier pour continuer ...
+      </button>
+    </div>
+    <?php
+}
+?>
       <div class="space-tab"></div>
 
     </ion-content>

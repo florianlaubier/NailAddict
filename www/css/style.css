@@ -3,6 +3,10 @@ a {
   text-decoration: none;
 }
 
+.padCustom{
+  padding:0 10px;
+}
+
 /* Index */
 .index{
     padding: 10px;

@@ -7,7 +7,7 @@ require_once("connexion.php");
 mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
 mysql_select_db($bdd_name) or die(mysql_error());
 
-$query='SELECT * FROM  `Utilisateur`';
+$query='SELECT * FROM  `utilisateur`';
 $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
 ?>
 
@@ -45,22 +45,22 @@ while($util = mysql_fetch_array($All_util))
     <div class="item item-body ">
       <h3 id="information">Modifier mes informations</h3>
         <fieldset>
-          <p> Nom : 
+          <p> Nom :
             <input value="<?php echo $util['nom']; ?>"></input>
           </p>
-          <p> Prénom : 
+          <p> Prénom :
             <input value="<?php echo $util['prenom']; ?>"></input>
           </p>
-          <p> Pseudo : 
+          <p> Pseudo :
             <input value="<?php echo $util['pseudo']; ?>"></input>
           </p>
-          <p> Date de naissance : 
+          <p> Date de naissance :
             <input value="<?php echo $util['date_naissance']; ?>"></input>
           </p>
-          <p> Description : 
+          <p> Description :
             <input value="<?php echo $util['description_user']; ?>"></input>
           </p>
-          <p> Changer ma photo de profil : 
+          <p> Changer ma photo de profil :
             <input value="<?php echo $util['lien_photo']; ?>"></input>
           </p>
         </fieldset>
