@@ -12,31 +12,28 @@
 
     <ion-content class="index">
 
-    <div class="list">
+
+      <div class="list">
         <img src="img/nail.png">
-        <form id="connectForm">
-          <label class="item item-input">
-            <span class="input-label">Username</span>
-            <input id="login" name="login" type="text" ></label>
-          <label class="item item-input">
-            <span class="input-label">Password</span>
-            <input id="password" name="password" type="password" >
-          </label>
-     
-          <input type="button" id="submitButton" class="button button-block button-positive" value="Se connecter "/>
-        </form>
-        <button id="registerButton" class="button button-block button-calm" >S'inscrire</button>
-        <div id="resultatConnexionUser"></div>
+        <label class="item item-input">
+          <span class="input-label">Username</span>
+          <input id="login" name="login" type="text"></label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input id="password" name="password" type="password"></label>
+      </div>
 
-       </div>
+      <button id="submitButton" class="button button-block button-positive">Se connecter</button>
+      <div id="resultatConnexionUser"></div>
+      <button class="button button-block button-calm">S'inscrire</button>
+
       <div class="space-tab"></div>
-
-        
-      </ion-content>
+    </ion-content>
 
   </ion-pane>
 </body>
 
 <?php
+  require_once("nav.php");
   require_once("footer.php");
 ?>

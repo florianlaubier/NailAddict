@@ -1,39 +1,36 @@
 <?php
-echo "1";
- 		$config['host'] = '127.0.0.1:8080';
-        $config['dbname'] = 'nail';
-        $config['user'] = 'root';
-        $config['pass'] = '';
+require_once('connexion.php');
+
+mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
+mysql_select_db($bdd_name) or die(mysql_error());
 
 $username = $_POST['login'];
 $pwd = $_POST['password'];
-$db = mysql_connect($config['host'], $config['user'], $config['pass']);
 
-$connect = mysql_select_db( $config['dbname'], $db);
-
-if(!$connect) 
+if($username != "" && $pwd != "")
 {
-    echo "Ca marche pas";
-    throw new Exception('erreurs MYQSL : ' . mysql_error());
-}
-else 
-{
-    echo "Ca marche";
-    $connection = true;
-}
+    $query = "SELECT * FROM utilisateur WHERE pseudo ='$username' AND mot_de_passe ='$pwd'";
 
-$query = "SELECT * FROM utilisateur WHERE pseudo ='$username' AND mot_de_passe ='$pwd'";
-$result = mysql_query($query);
-$user_found = mysql_fetch_assoc($result);
+    $result = mysql_query($query);
+    $user_found = mysql_fetch_assoc($result);
 
-if($user_found['pseudo']==$username)
-{
-	session_start();
-    $_SESSION['user'] = $username;
-    echo "Success";
+    if($user_found['mot_de_passe']==$pwd && $user_found['mot_de_passe'] != "" )
+    {
+        session_start();
+        $_SESSION['user'] = $username;
+        $test = $user_found['mot_de_passe'];
+
+        echo json_encode(array("value"=>"Success"));
+    }
+    else
+    {
+        echo json_encode(array("value"=>"Failed"));
+    }
 }
 else
 {
-    echo "Failed";
+    echo json_encode(array("value"=>"Failed"));
 }
+
+
 ?>
