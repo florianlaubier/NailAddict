@@ -7,8 +7,10 @@ require_once("connexion.php");
 mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
 mysql_select_db($bdd_name) or die(mysql_error());
 
-$query='SELECT * FROM  `Utilisateur`';
+$query='SELECT * FROM  `utilisateur`';
 $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
+
+session_start();
 ?>
 
 
@@ -22,6 +24,10 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
 <ion-content>
 
 <?php
+
+    $isAuthOK = isset($_SESSION["user"]) && !empty($_SESSION["user"]);
+if ($isAuthOK) {
+
 while($util = mysql_fetch_array($All_util))
 {
   ?>
@@ -64,6 +70,20 @@ while($util = mysql_fetch_array($All_util))
 ?>
 
 <div class="space-tab"></div>
+
+
+  <?php
+} else {
+    // sinon on redirige l'utilisateur n'est pas authentifié
+    ?>
+    <div class="padCustom">
+      <button id="recoBtn" class="button button-block button-royal">
+        Veuillez vous identifier pour continuer ...
+      </button>
+    </div>
+    <?php
+}
+?>
 
 </ion-content>
 
