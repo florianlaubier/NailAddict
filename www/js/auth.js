@@ -24,7 +24,7 @@ $(document).ready(function(){
           }, "json");
   });
 
-  $('.decoBtn').click(function(){
+  $('#decoBtn').click(function(){
       $.post('form_deco.php',
              function(data){
               console.log(data);
