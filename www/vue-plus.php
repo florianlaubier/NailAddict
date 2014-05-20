@@ -21,25 +21,24 @@ session_start();
 </ion-header-bar>
 
 <ion-content>
+  <div class="padCustom">
+    <button id="decoBtn" class="button button-block button-assertive">Forcer Deconnexion</button>
+  </div>
+
     <?php
       $isAuthOK = isset($_SESSION["user"]) && !empty($_SESSION["user"]);
       if ($isAuthOK) {
         ?>
-         <div class="list card">
-            <button id="decoBtn" class="button button-block button-calm">deconnexion</button>
-            <div class="item item-body ">
-              <p>Page non disponible pour l'instant.</p>
-            </div>
-          </div>
 
   <?php
       } else {
           // sinon on redirige l'utilisateur n'est pas authentifié
           ?>
-          <div class="padCustom">
+          <div class="padCustom" style ="text-align:center;">
             <button id="recoBtn" class="button button-block button-royal">
               Veuillez vous identifier pour continuer ...
             </button>
+            <div id="resultatDeconnexionUser"></div>
           </div>
           <?php
       }

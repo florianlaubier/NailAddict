@@ -1,32 +1,26 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.6
+-- version 4.1.12
 -- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Lun 19 Mai 2014 à 23:42
--- Version du serveur :  5.6.16
--- Version de PHP :  5.5.9
+-- Host: localhost:8889
+-- Generation Time: May 20, 2014 at 03:58 PM
+-- Server version: 5.5.34
+-- PHP Version: 5.5.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
--- Base de données :  `nail`
+-- Database: `nail`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `collection`
+-- Table structure for table `collection`
 --
 
-CREATE TABLE IF NOT EXISTS `collection` (
+CREATE TABLE `collection` (
   `id_user` int(11) NOT NULL,
   `id_vernis` int(11) NOT NULL,
   KEY `id_user` (`id_user`),
@@ -34,21 +28,25 @@ CREATE TABLE IF NOT EXISTS `collection` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `collection`
+-- Dumping data for table `collection`
 --
 
 INSERT INTO `collection` (`id_user`, `id_vernis`) VALUES
 (2, 2),
 (2, 3),
-(2, 1);
+(2, 1),
+(4, 1),
+(4, 2),
+(4, 3),
+(4, 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `localisation`
+-- Table structure for table `localisation`
 --
 
-CREATE TABLE IF NOT EXISTS `localisation` (
+CREATE TABLE `localisation` (
   `id_localisation` int(11) NOT NULL AUTO_INCREMENT,
   `ville` varchar(50) NOT NULL,
   `pays` varchar(50) NOT NULL,
@@ -56,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `localisation` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Contenu de la table `localisation`
+-- Dumping data for table `localisation`
 --
 
 INSERT INTO `localisation` (`id_localisation`, `ville`, `pays`) VALUES
@@ -65,10 +63,10 @@ INSERT INTO `localisation` (`id_localisation`, `ville`, `pays`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `magasin`
+-- Table structure for table `magasin`
 --
 
-CREATE TABLE IF NOT EXISTS `magasin` (
+CREATE TABLE `magasin` (
   `id_magasin` int(11) NOT NULL AUTO_INCREMENT,
   `nom_magasin` varchar(100) NOT NULL,
   `url` varchar(100) DEFAULT NULL,
@@ -78,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `magasin` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Contenu de la table `magasin`
+-- Dumping data for table `magasin`
 --
 
 INSERT INTO `magasin` (`id_magasin`, `nom_magasin`, `url`, `id_localisation_magasin`) VALUES
@@ -88,10 +86,10 @@ INSERT INTO `magasin` (`id_magasin`, `nom_magasin`, `url`, `id_localisation_maga
 -- --------------------------------------------------------
 
 --
--- Structure de la table `media`
+-- Table structure for table `media`
 --
 
-CREATE TABLE IF NOT EXISTS `media` (
+CREATE TABLE `media` (
   `id_media` int(11) NOT NULL AUTO_INCREMENT,
   `lien_media` varchar(200) NOT NULL,
   `type` enum('video','photo') DEFAULT NULL,
@@ -100,23 +98,25 @@ CREATE TABLE IF NOT EXISTS `media` (
   `id_user` int(11) NOT NULL,
   PRIMARY KEY (`id_media`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- Contenu de la table `media`
+-- Dumping data for table `media`
 --
 
 INSERT INTO `media` (`id_media`, `lien_media`, `type`, `description_media`, `date_creation`, `id_user`) VALUES
 (1, 'http://onglesdecoration.com/wp-content/uploads/2013/09/dessin-deco-ongles-nail-art-ourse-panda-simple.png', 'photo', 'PAnda Nails! :)', '2014-05-19', 3),
-(2, 'http://1.1.1.5/bmi/media.meltyfashion.fr/article-1355416-ajust_930/a-chaque-ongle-son-sticker-rad-nail-pour.jpg', NULL, 'Boumchaka!!', '2014-05-13', 2);
+(2, 'http://1.1.1.5/bmi/media.meltyfashion.fr/article-1355416-ajust_930/a-chaque-ongle-son-sticker-rad-nail-pour.jpg', NULL, 'Boumchaka!!', '2014-05-13', 2),
+(3, 'http://www.coupay.com/topoften/wp-content/uploads/2013/05/Nail-art-16.jpg', 'photo', 'Trop fort', '2014-05-20', 4),
+(4, 'https://lh6.ggpht.com/DO1Xz4IwbmbsPJDJyy6m5fBBXwewYh0NFYkozu8YWWAUiiUPUYEoI5ISDiMDd_d8VWE=w300', 'photo', 'petit test', '2014-05-13', 4);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `prix`
+-- Table structure for table `prix`
 --
 
-CREATE TABLE IF NOT EXISTS `prix` (
+CREATE TABLE `prix` (
   `id_prix` int(11) NOT NULL AUTO_INCREMENT,
   `valeur` float NOT NULL,
   `devise` enum('€','$') NOT NULL DEFAULT '€',
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `prix` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Contenu de la table `prix`
+-- Dumping data for table `prix`
 --
 
 INSERT INTO `prix` (`id_prix`, `valeur`, `devise`) VALUES
@@ -134,10 +134,10 @@ INSERT INTO `prix` (`id_prix`, `valeur`, `devise`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateur`
+-- Table structure for table `utilisateur`
 --
 
-CREATE TABLE IF NOT EXISTS `utilisateur` (
+CREATE TABLE `utilisateur` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
@@ -149,24 +149,25 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id_localisation_user` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_user`),
   KEY `id_localisation_user` (`id_localisation_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- Contenu de la table `utilisateur`
+-- Dumping data for table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`id_user`, `nom`, `prenom`, `pseudo`, `mot_de_passe`, `date_naissance`, `lien_photo`, `description_user`, `id_localisation_user`) VALUES
 (1, 'RENAUDIE', 'Mathéa', 'Mathou', '', '1993-04-29', 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-prn1/t1.0-9/1545992_697240656993559_659707393_n.jpg', NULL, 1),
 (2, 'Ruiz', 'Coralie', 'Coco', 'coco64', '1991-08-23', NULL, NULL, 1),
-(3, 'Gourp', 'Clémentine', 'cliky', '123', '1991-09-30', NULL, NULL, NULL);
+(3, 'Gourp', 'Clémentine', 'cliky', '123', '1991-09-30', NULL, NULL, NULL),
+(4, 'Laubier', 'Florian', 'flo', 'flo', '1991-05-30', 'http://blog.gaborit-d.com/wp-content/uploads/2013/08/parodies-3d-minions-18.jpg', 'coupe coupe', 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `vernis`
+-- Table structure for table `vernis`
 --
 
-CREATE TABLE IF NOT EXISTS `vernis` (
+CREATE TABLE `vernis` (
   `id_vernis` int(11) NOT NULL AUTO_INCREMENT,
   `marque` varchar(50) NOT NULL,
   `texture` varchar(50) NOT NULL,
@@ -183,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `vernis` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Contenu de la table `vernis`
+-- Dumping data for table `vernis`
 --
 
 INSERT INTO `vernis` (`id_vernis`, `marque`, `texture`, `couleur`, `reference`, `avis`, `lien_vernis`, `id_prix_vernis`, `id_magasin_vernis`, `date_creation`) VALUES
@@ -192,41 +193,37 @@ INSERT INTO `vernis` (`id_vernis`, `marque`, `texture`, `couleur`, `reference`, 
 (3, 'Kiko', 'Lacquer', 'Violet', '', '', 'http://img11.hostingpics.net/pics/476170verniskikonaillacquerviolet.png', 2, 1, '0000-00-00');
 
 --
--- Contraintes pour les tables exportées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `collection`
+-- Constraints for table `collection`
 --
 ALTER TABLE `collection`
   ADD CONSTRAINT `collection_ibfk_1` FOREIGN KEY (`id_vernis`) REFERENCES `vernis` (`id_vernis`),
   ADD CONSTRAINT `contrainte_utilisateur_vernis` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`);
 
 --
--- Contraintes pour la table `magasin`
+-- Constraints for table `magasin`
 --
 ALTER TABLE `magasin`
   ADD CONSTRAINT `contrainte_magasin_localisation` FOREIGN KEY (`id_localisation_magasin`) REFERENCES `localisation` (`id_localisation`);
 
 --
--- Contraintes pour la table `media`
+-- Constraints for table `media`
 --
 ALTER TABLE `media`
   ADD CONSTRAINT `media_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`);
 
 --
--- Contraintes pour la table `utilisateur`
+-- Constraints for table `utilisateur`
 --
 ALTER TABLE `utilisateur`
   ADD CONSTRAINT `contrainte_utilisateur_localisation` FOREIGN KEY (`id_localisation_user`) REFERENCES `localisation` (`id_localisation`);
 
 --
--- Contraintes pour la table `vernis`
+-- Constraints for table `vernis`
 --
 ALTER TABLE `vernis`
   ADD CONSTRAINT `contrainte_magasin_vernis` FOREIGN KEY (`id_magasin_vernis`) REFERENCES `magasin` (`id_magasin`),
   ADD CONSTRAINT `contrainte_vernis_prix` FOREIGN KEY (`id_prix_vernis`) REFERENCES `prix` (`id_prix`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

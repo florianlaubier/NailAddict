@@ -8,12 +8,6 @@ session_start();
 mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
 mysql_select_db($bdd_name) or die(mysql_error());
 
-$user_id = $_SESSION['user']['id_user'];
-echo $user_id;
-$query="SELECT * FROM  media WHERE id_user = $user_id ORDER BY date_creation";
-$All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
-
-session_start();
 ?>
 
 <body ng-app="starter">
@@ -26,9 +20,14 @@ session_start();
 <ion-content>
 
 <?php
-  print_r($_SESSION['user']['pseudo']);
-    $isAuthOK = isset($_SESSION["user"]) && !empty($_SESSION["user"]);
+  //print_r($_SESSION['user']['pseudo']);
+  $isAuthOK = isset($_SESSION["user"]) && !empty($_SESSION["user"]);
 if ($isAuthOK) {
+
+$user_id = $_SESSION['user']['id_user'];
+$query="SELECT * FROM  media WHERE id_user = $user_id ORDER BY date_creation";
+$All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
+
   ?>
   <div class="list card">
 
@@ -39,6 +38,7 @@ if ($isAuthOK) {
       <img src=<?php echo '"', $_SESSION['user']['lien_photo'], '"'; ?>>
       <?php } ?>
       <h2><?php echo $_SESSION["user"]['pseudo']; ?></h2>
+      <p><?php echo $_SESSION["user"]['description_user']; ?></p>
     </div>
 
     <?php require_once("nav-profil.php"); ?>
@@ -48,35 +48,30 @@ while($util = mysql_fetch_array($All_util))
 {
   ?>
 
-    <div class="item item-body ">
-      <img class="full-image" src="<?php echo $util['lien_media']; ?>">
-      <p></p>
-      <p>
-        <a href="#" class="subdued">1 Like</a>
-        <a href="#" class="subdued">5 Comments</a>
-      </p>
-    </div>
-
-    <div class="item tabs tabs-secondary tabs-icon">
-      <a class="tab-item" href="#"> <i class="icon ion-thumbsup"></i>
-        Like
+      <a class="item item-thumbnail-left" href="detail-photo.php??id=<?php echo $util['id_media']; ?>">
+        <img src="<?php echo $util['lien_media']; ?>">
+        <h2><?php echo $util['type']; ?></h2>
+        <p><?php echo $util['description_media']; ?></p>
       </a>
-      <a class="tab-item" href="#"> <i class="icon ion-chatbox"></i>
-        Comment
-      </a>
-      <a class="tab-item" href="#">
-        <i class="icon ion-share"></i>
-        Share
-      </a>
-    </div>
 
-  </div>
+<!--       <a class="item item-thumbnail-left" href="#">
+        <img src="<?php echo $util['lien_media']; ?>">
+        <h2><?php echo $util['type']; ?></h2>
+        <p><?php echo $util['description_media']; ?></p>
+      </a>
 
-  <?php
+      <a class="item item-thumbnail-left" href="#">
+        <img src="<?php echo $util['lien_media']; ?>">
+        <h2><?php echo $util['type']; ?></h2>
+        <p><?php echo $util['description_media']; ?></p>
+      </a> -->
+
+<?php
 };
 ?>
+</div>
 
-<div class="space-tab"></div>
+<div class="space-tab" style="height:70px;"></div>
 
 
   <?php

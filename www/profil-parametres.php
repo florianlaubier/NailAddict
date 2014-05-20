@@ -34,17 +34,17 @@ while($util = mysql_fetch_array($All_util))
 
     <?php require_once("nav-profil.php");  ?>
 
-    <div class="item">
-      <a href="vue-parametres.php#informations">
-        <p>Modifier mes informations</p>
-      </a>
-      <a href="vue-parametres.php#couleur">
-        <p>Choix arrière plan</p>
-      </a>
-      <a href="vue-parametres.php#facebook">
-        <p>Connexion Facebook</p>
-      </a>
-    </div>
+  <!--     <div class="item">
+        <a href="vue-parametres.php#informations">
+          <p>Modifier mes informations</p>
+        </a>
+        <a href="vue-parametres.php#couleur">
+          <p>Choix arrière plan</p>
+        </a>
+        <a href="vue-parametres.php#facebook">
+          <p>Connexion Facebook</p>
+        </a>
+      </div> -->
 
     <div class="item item-body ">
       <h3 id="information">Modifier mes informations</h3>
@@ -72,13 +72,13 @@ while($util = mysql_fetch_array($All_util))
         </fieldset>
     </div>
 
-    <div class="item item-body ">
+<!--     <div class="item item-body ">
       <h3 id="couleur">Choix arrière plan</h3>
     </div>
 
     <div class="item item-body ">
       <h3 id="facebook">Connexion Facebook</h3>
-    </div>
+    </div> -->
 
   </div>
 

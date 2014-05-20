@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+header('Content-type: application/json');
+
 $isAuthOK = isset($_SESSION["user"]) && !empty($_SESSION["user"]);
 if($isAuthOK){
     $_SESSION["user"] = null;
@@ -9,4 +11,8 @@ if($isAuthOK){
     $ret["decoOK"] = true; // on met a true cette variable, elle sera utilisé par
     echo json_encode($ret);
 }
-header('Location: index.php');
+else
+{
+   $ret["decoOK"] = false; // on met a true cette variable, elle sera utilisé par
+    echo json_encode($ret);
+}

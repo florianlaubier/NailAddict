@@ -7,6 +7,7 @@
 mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
 mysql_select_db($bdd_name) or die(mysql_error());
 
+
 $query='SELECT * FROM  `utilisateur`';
 $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
 
@@ -35,7 +36,7 @@ session_start();
         <div class="item item-avatar red-cards">
           <img src=<?php echo '"', $util['lien_photo'], '"'; ?>>
           <h2><?php echo $util['pseudo']; ?></h2>
-          <p>Nail'artist pur et dur</p>
+          <p><?php echo $util['description_user']; ?></p>
         </div>
 
         <div class="item item-body ">

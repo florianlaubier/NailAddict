@@ -24,7 +24,7 @@ $(document).ready(function(){
           }, "json");
   });
 
-  $('#decoBtn').click(function(){
+  $('.decoBtn').click(function(){
       $.post('form_deco.php',
              function(data){
               console.log(data);
@@ -32,11 +32,11 @@ $(document).ready(function(){
               if(data.decoOK)
               {
                     // data.redirect contains the string URL to redirect to
-                    window.location.href = 'index.php';
+                    window.location.href = 'decoMess.php';
               }
               else
               {
-                   $("#resultatConnexionUser").html("<p>Erreur lors de la connexion...</p>");
+                   $("#resultatDeconnexionUser").html("<p>Erreur lors de la deconnexion...</p>");
               }
           }, "json");
   });
