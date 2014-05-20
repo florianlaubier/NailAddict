@@ -8,7 +8,7 @@ mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
 mysql_select_db($bdd_name) or die(mysql_error());
 
 
-$query='SELECT * FROM  `utilisateur`';
+$query='SELECT * FROM  media JOIN utilisateur on utilisateur.id_user= media.id_media ORDER BY date_creation';
 $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
 
 session_start();
@@ -33,14 +33,14 @@ session_start();
 
       <div class="list card">
 
-        <div class="item item-avatar red-cards">
+        <div class="item item-avatar item-energized">
           <img src=<?php echo '"', $util['lien_photo'], '"'; ?>>
-          <h2><?php echo $util['pseudo']; ?></h2>
+          <h2 class="pseudo"><?php echo $util['pseudo']; ?></h2>
           <p><?php echo $util['description_user']; ?></p>
         </div>
 
         <div class="item item-body ">
-          <img class="full-image" src="img/ongle.png">
+          <img class="full-image" src="<?php echo $util['lien_media']; ?>">
           <p></p>
           <p>
             <a href="#" class="subdued">1 Like</a>
