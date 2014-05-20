@@ -7,7 +7,9 @@ require_once("connexion.php");
 mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
 mysql_select_db($bdd_name) or die(mysql_error());
 
-$query='SELECT * FROM  `utilisateur`';
+$photo_id = $_GET['id'];
+
+$query='SELECT * FROM  `media` WHERE id_media = '.$photo_id.' ';
 $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
 ?>
 
@@ -36,7 +38,7 @@ while($util = mysql_fetch_array($All_util))
     <?php require_once("nav-profil.php"); ?>
 
     <div class="item item-body ">
-      <img class="full-image" src="img/ongle.png">
+      <img class="full-image" src="<?php echo $util['lien_media']; ?>">
       <p></p>
       <p>
         <a href="#" class="subdued">1 Like</a>

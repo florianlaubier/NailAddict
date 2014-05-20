@@ -7,7 +7,9 @@ require_once("connexion.php");
 mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
 mysql_select_db($bdd_name) or die(mysql_error());
 
-$query='SELECT * FROM  `vernis` WHERE id_vernis = 1';
+$vernis_id = $_GET['id'];
+
+$query='SELECT * FROM  `vernis` WHERE id_vernis = '.$vernis_id.' ' ;
 $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
 
 $util =mysql_fetch_assoc($All_util);
@@ -28,7 +30,7 @@ $util =mysql_fetch_assoc($All_util);
     <?php require_once("nav-profil.php"); ?>
 
     <div class="item item-body ">
-      <img class="full-image" src="img/vernis1.png">
+      <img class="full-image" src="<?php echo $util['lien_vernis']; ?>">
       <p>Marque : <?php echo $util['marque']; ?></p>
       <p>Texture : <?php echo $util['texture']; ?></p>
       <p>Couleur : <?php echo $util['couleur']; ?></p>
