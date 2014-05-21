@@ -91,7 +91,7 @@ while($util = mysql_fetch_array($All_util))
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Nouveaux mot de passe :</span>
+            <span class="input-label">Nouveau mot de passe :</span>
             <input id="newMdp" name="newMdp" type="password">
           </label>
 

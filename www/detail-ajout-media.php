@@ -17,7 +17,7 @@ $retour = array();
   <ion-pane>
 
   <ion-header-bar class="bar-stable">
-  <h1 class="title">Ajouter un media</h1>
+  <h1 class="title">Ajouter un média</h1>
 </ion-header-bar>
 
 <ion-content>
@@ -29,7 +29,7 @@ $retour = array();
       <form id="ajout_medio" method="post" action="#">
 
             <label class="item item-input">
-            <span class="input-label">Type de media</span>
+            <span class="input-label">Type de média <span id="rouge">*</span> :</span>
                 <select id="type_media" name="type_media">
                   <option value="photo">photo</option>
                   <option value="video">video</option>
@@ -37,38 +37,58 @@ $retour = array();
             </label>
 
             <label class="item item-input">
-            <span class="input-label">Lien de media :</span>
-              <input  id="lienMedia" name="lienMedia" type="text" value="" required>
+            <span class="input-label">Lien du média <span id="rouge">*</span> :</span>
+              <input  id="lienMedia" name="lienMedia" type="text">
             </label>
 
             <label class="item item-input">
-            <span class="input-label">Description media :</span>
-              <textarea id="descriptionMedia" name="descriptionMedia" rows="10" type="text" value="" required></textarea>
+            <span class="input-label">Description du média <span id="rouge">*</span> :</span>
+              <textarea id="descriptionMedia" name="descriptionMedia" rows="10" type="text"></textarea>
             </label>
 
         <div class="padError">
-<?php
-  if(isset($_POST) && is_array($_POST) && isset($_POST['ajoutMedia_Btn']))
-  {
-    // Récupération des données du formaulaire
-    $lien = $_POST['lienMedia'];
-    $type = $_POST['type_media'];
-    $descriptionMedia = $_POST['descriptionMedia'];
+          <?php
+            if(isset($_POST) && is_array($_POST) && isset($_POST['ajoutMedia_Btn']))
+            {
 
-    $date_courante = new Datetime();
-    $date = $date_courante->format('Y-m-d');
+              // Récupération des données du formaulaire
+              $date_courante = new Datetime();
+              $date = $date_courante->format('Y-m-d');
 
-// Insertion du vernis renseigné
-    mysql_query("INSERT INTO `nail`.`media` (`id_media`, `lien_media`, `type`, `description_media`, `date_creation`, `id_user`, `valide`) VALUES (NULL, '$lien', '$type', '$descriptionMedia', '$date', '$user_id', '0')")
-            or die(mysql_error());
+              $lien = $_POST['lienMedia'];
+              $type = $_POST['type_media'];
+              $descriptionMedia = mysql_real_escape_string(htmlspecialchars($_POST['descriptionMedia']));
+
+              $errors = array();
+
+              if(!isset($lien) || $lien == '')
+              {
+                $errors[] = "Lien obligatoire !";
+              }
+              if(!isset($descriptionMedia) || $descriptionMedia == '')
+              {
+                $errors[] = "Description obligatoire !";
+              }
+              foreach($errors as $error)
+              {
+                echo $error, '<br/>';
+              }
+              if(count($errors) == 0)
+              {
+                // Insertion du vernis renseigné
+                mysql_query("INSERT INTO `nail`.`media` (`id_media`, `lien_media`, `type`, `description_media`, `date_creation`, `id_user`, `valide`) 
+                  VALUES (NULL, '$lien', '$type', '$descriptionMedia', '$date', '$user_id', '0')")
+                        or die(mysql_error());
 
 
-    echo "Vernis ajouté avec succés";
+                echo "Vernis ajouté avec succés";
+              }
 
-  }
-?>
+            }
+          ?>
         </div>
 
+        <center id="rouge"> * Champs obligatoires</center>
         <input class="button button-block button-energized" id="ajoutMedia_Btn" name="ajoutMedia_Btn" type="submit" value="Envoi"/>
 
         </form>

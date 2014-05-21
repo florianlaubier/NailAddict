@@ -32,42 +32,42 @@ $retour = array();
       <form id="ajout_vernis" method="post" action="#">
 
             <label class="item item-input">
-            <span class="input-label">Marque :</span>
-              <input id="vernis_marque" name="vernis_marque" type="text" value="" required>
+            <span class="input-label">Marque <span id="rouge">*</span> :</span>
+              <input id="vernis_marque" name="vernis_marque" type="text">
             </label>
 
             <label class="item item-input">
-            <span class="input-label">Texture :</span>
-              <input  id="vernis_texture" name="vernis_texture" type="text" value="" required>
+            <span class="input-label">Texture <span id="rouge">*</span> :</span>
+              <input  id="vernis_texture" name="vernis_texture" type="text">
             </label>
 
             <label class="item item-input">
-            <span class="input-label">Couleur :</span>
-              <input id="vernis_couleur" name="vernis_couleur" type="text" value="" required>
+            <span class="input-label">Couleur <span id="rouge">*</span> :</span>
+              <input id="vernis_couleur" name="vernis_couleur" type="text">
             </label>
 
             <label class="item item-input">
-            <span class="input-label">Référence :</span>
-              <input  id="vernis_ref" name="vernis_ref" type="text" value="" required>
+            <span class="input-label">Référence <span id="rouge">*</span> :</span>
+              <input  id="vernis_ref" name="vernis_ref" type="text">
             </label>
 
             <label class="item item-input">
             <span class="input-label">Avis :</span>
-              <textarea id="vernis_avis"  name="vernis_avis" rows="10" type="text" value="" required></textarea>
+              <textarea id="vernis_avis"  name="vernis_avis" rows="10" type="text"></textarea>
             </label>
 
             <label class="item item-input">
-            <span class="input-label">Lien de la photo :</span>
-              <input  id="vernis_lien" id="vernis_lien" type="text" value="" required>
+            <span class="input-label">Lien de la photo <span id="rouge">*</span> :</span>
+              <input  id="vernis_lien" id="vernis_lien" type="text">
             </label>
 
             <label class="item item-input">
-            <span class="input-label">Prix :</span>
-              <input  id="vernis_prix" id="vernis_prix" type="text" value="" required>
+            <span class="input-label">Prix <span id="rouge">*</span> :</span>
+              <input  id="vernis_prix" id="vernis_prix" type="text">
             </label>
 
             <label class="item item-input">
-            <span class="input-label">Magasin :</span>
+            <span class="input-label">Magasin <span id="rouge">*</span> :</span>
               <select id="vernis_magasin" name="vernis_magasin">
 
               <?php while($tab_mag = mysql_fetch_array($All_mag)){ ?>
@@ -78,53 +78,84 @@ $retour = array();
             </label>
 
         <div class="padError">
-<?php
-  if(isset($_POST) && is_array($_POST) && isset($_POST['ajoutVernis_Btn']))
-  {
-
-    // Récupération des données du formaulaire
-    $marque = $_POST['vernis_marque'];
-    $texture = $_POST['vernis_texture'];
-    $couleur = $_POST['vernis_couleur'];
-    $ref = $_POST['vernis_ref'];
-    $avis = $_POST['vernis_avis'];
-    $lien = 1; // Val à récupérer(table media)
-    //$_POST['vernis_lien'];
-    $prix = 1;
-    //$_POST['vernis_prix'];            // Val à récupérer (table prix)
-    $magasin_id = $_POST['vernis_magasin'];
-    $date_courante = new Datetime();
-    $date = $date_courante->format('Y-m-d');
-
-
-// Insertion du vernis renseigné
-    $queryVernis = "INSERT INTO vernis (id_vernis, marque, texture, couleur, reference, avis, lien_vernis, id_prix_vernis, id_magasin_vernis, date_creation, valide) VALUES (NULL, '$marque', '$texture', '$couleur', '$ref', '$avis', '$lien', '$prix', '$magasin_id', '$date', 0)";
-// Récupération de l'id de ce dernier
-
-    $insertVernis = mysql_query($queryVernis)or die(mysql_error());
-        // Si l'insertion a fonctionné
-        if ( $insertVernis == TRUE )
-        {
-         $queryVernisId = "SELECT MAX(id_vernis) FROM vernis";
-
-            $resultVernisId = mysql_query($queryVernisId)or die(mysql_error());
-            $vernis_id = mysql_fetch_row($resultVernisId);
-            $queryCollection = "INSERT INTO collection (id_user, id_vernis) VALUES ( $user_id, $vernis_id[0]) ";
-
-            $insertCollection = mysql_query($queryCollection)or die(mysql_error());
-            if($insertCollection)
+          <?php
+            if(isset($_POST) && is_array($_POST) && isset($_POST['ajoutVernis_Btn']))
             {
-                echo "Vernis ajouté avec succés";
+
+              // Récupération des données du formaulaire
+              $marque = mysql_real_escape_string(htmlspecialchars($_POST['vernis_marque']));
+              $texture = mysql_real_escape_string(htmlspecialchars($_POST['vernis_texture']));
+              $couleur = mysql_real_escape_string(htmlspecialchars($_POST['vernis_couleur']));
+              $ref = mysql_real_escape_string(htmlspecialchars($_POST['vernis_ref']));
+              $avis = mysql_real_escape_string(htmlspecialchars($_POST['vernis_avis']));
+              $lien = $_POST['vernis_lien'];
+              $prix = mysql_real_escape_string(htmlspecialchars($$_POST['vernis_prix']));            // Val à récupérer (table prix)
+              $magasin_id = $_POST['vernis_magasin'];
+              $date_courante = new Datetime();
+              $date = $date_courante->format('Y-m-d');
+
+              $errors = array();
+
+              if(!isset($marque) || $marque == '')
+              {
+                $errors[] = "Marque obligatoire !";
+              }
+              if(!isset($texture) || $texture == '')
+              {
+                $errors[] = "Texture obligatoire !";
+              }
+              if(!isset($couleur) || $couleur == '')
+              {
+                $errors[] = "Couleur obligatoire !";
+              }
+              if(!isset($ref) || $ref == '')
+              {
+                $errors[] = "Référence obligatoire !";
+              }
+              if(!isset($lien) || $lien == '')
+              {
+                $errors[] = "Lien obligatoire !";
+              }
+              if(!isset($prix) || $prix == '')
+              {
+                $errors[] = "Prix obligatoire !";
+              }
+              foreach($errors as $error)
+              {
+                echo $error, '<br/>';
+              }
+              if(count($errors) == 0)
+              {
+                // Insertion du vernis renseigné
+                $queryVernis = "INSERT INTO vernis (id_vernis, marque, texture, couleur, reference, avis, lien_vernis, id_prix_vernis, id_magasin_vernis, date_creation, valide) 
+                VALUES (NULL, '$marque', '$texture', '$couleur', '$ref', '$avis', '$lien', '$prix', '$magasin_id', '$date', 0)";
+              
+                // Récupération de l'id de ce dernier
+                $insertVernis = mysql_query($queryVernis)or die(mysql_error());
+                  
+                // Si l'insertion a fonctionné
+                if ( $insertVernis == TRUE )
+                {
+                  $queryVernisId = "SELECT MAX(id_vernis) FROM vernis";
+                  $resultVernisId = mysql_query($queryVernisId)or die(mysql_error());
+                  $vernis_id = mysql_fetch_row($resultVernisId);
+                  $queryCollection = "INSERT INTO collection (id_user, id_vernis) VALUES ( $user_id, $vernis_id[0]) ";
+                  $insertCollection = mysql_query($queryCollection)or die(mysql_error());
+                  if($insertCollection)
+                  {
+                    echo "Vernis ajouté avec succés";
+                  }
+                }
+                else
+                {
+                  echo "Erreur lors de l'ajout...";
+                }
+              }
             }
-        }
-        else
-        {
-          echo "Erreur lors de l'ajout...";
-        }
-  }
-?>
+          ?>
         </div>
 
+        <center id="rouge">* Champs obligatoires</center>
         <input class="button button-block button-energized" id="ajoutVernis_Btn" name="ajoutVernis_Btn" type="submit" value="Envoi"/>
 
         </form>
