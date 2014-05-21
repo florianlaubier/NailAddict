@@ -8,7 +8,7 @@ mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
 mysql_select_db($bdd_name) or die(mysql_error());
 
 
-$query='SELECT * FROM  media JOIN utilisateur on utilisateur.id_user= media.id_media ORDER BY date_creation';
+$query='SELECT * FROM  media JOIN utilisateur on utilisateur.id_user= media.id_user WHERE valide = 1 ORDER BY date_creation';
 $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
 
 session_start();
