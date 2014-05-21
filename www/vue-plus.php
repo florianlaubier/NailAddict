@@ -22,7 +22,7 @@ session_start();
 
 <ion-content>
   <div class="padCustom">
-    <button id="decoBtn" class="button button-block button-assertive">Forcer Deconnexion</button>
+    <button id="decoBtn" class="button button-block button-assertive">Déconnexion</button>
   </div>
 
     <?php
