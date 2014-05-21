@@ -87,11 +87,12 @@ $retour = array();
                 }
                 else
                 {
-                    mysql_query(" INSERT INTO prix (valeur) VALUES ('" . $prix . "')")
+                      $resquery= mysql_query(" INSERT INTO prix (id_prix, valeur) VALUES (NULL,'" . $prix . "')")
                       or die(mysql_error());
 
-                      $resultP = mysql_query("SELECT * FROM prix WHERE valeur='$prix'");
-                      $rowP = mysql_fetch_array($resultP);
+                      $prix= addslashes($prix);
+                      $resultP = mysql_query("SELECT * FROM prix WHERE valeur=$prix");
+                      $rowP = mysql_fetch_assoc($resultP);                    
                       $idprix = $rowP['id_prix'];
                 }
 
@@ -105,9 +106,13 @@ $retour = array();
                 // Si l'insertion a fonctionné
                 if ( $insertVernis == TRUE )
                 {
+                    $queryVernisId = "SELECT MAX(id_vernis) FROM vernis";
+                    $resultVernisId = mysql_query($queryVernisId)or die(mysql_error());
+                    $vernis_id = mysql_fetch_row($resultVernisId);
+                    $queryCollection = "INSERT INTO collection (id_user, id_vernis) VALUES ( $user_id, $vernis_id[0]) ";
+                    $insertCollection = mysql_query($queryCollection)or die(mysql_error());
 
                     echo "Vernis ajouté avec succés";
-
                 }
                 else
                 {
