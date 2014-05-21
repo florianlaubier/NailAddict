@@ -105,9 +105,13 @@ $retour = array();
                 // Si l'insertion a fonctionné
                 if ( $insertVernis == TRUE )
                 {
+                    $queryVernisId = "SELECT MAX(id_vernis) FROM vernis";
+                    $resultVernisId = mysql_query($queryVernisId)or die(mysql_error());
+                    $vernis_id = mysql_fetch_row($resultVernisId);
+                    $queryCollection = "INSERT INTO collection (id_user, id_vernis) VALUES ( $user_id, $vernis_id[0]) ";
+                    $insertCollection = mysql_query($queryCollection)or die(mysql_error());
 
                     echo "Vernis ajouté avec succés";
-
                 }
                 else
                 {
