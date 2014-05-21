@@ -60,7 +60,7 @@ $util = mysql_fetch_assoc($All_util);
 
           <label class="item item-input">
             <span class="input-label">Photo de profil </span>
-            <input id="photo" name="photo" type="text" value="<?php echo $util['lien_photo']; ?>">
+            <input id="lienPhoto" name="lienPhoto" type="text" value="<?php echo $util['lien_photo']; ?>">
           </label>
 
           <div class="padError">
@@ -75,10 +75,6 @@ $util = mysql_fetch_assoc($All_util);
     $date = $_POST['dateNaissance'];
     $lien = $_POST['lienPhoto'];
 
-    if(isset($_POST['ville']) || $_POST['ville'] != '')
-    {
-      $ville = mysql_real_escape_string(htmlspecialchars($_POST['ville']));
-    }
     if(isset($_POST['description']) || $_POST['description'] != '')
     {
       $description = mysql_real_escape_string(htmlspecialchars($_POST['description']));
@@ -110,9 +106,11 @@ $util = mysql_fetch_assoc($All_util);
       mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
       mysql_select_db($bdd_name) or die(mysql_error());
 
-      $passCrypt = sha1($passe);
-
-      mysql_query("UPDATE `nail`.`utilisateur` SET `nom` = '$nom', `prenom` = '$prenom', `pseudo` = '$pseudo', `date_naissance` = '$date', `lien_photo` = '$lien', `description_user` = '$description' WHERE `utilisateur`.`id_user` = $user_id;")
+      mysql_query("UPDATE `nail`.`utilisateur` 
+        SET `nom` = '$nom', `prenom` = '$prenom', `pseudo` = '$pseudo', 
+        `date_naissance` = '$date', `lien_photo` = '$lien', 
+        `description_user` = '$description' 
+        WHERE `utilisateur`.`id_user` = $user_id;")
       or die(mysql_error());
 
       echo("Modification(s) Acceptée(s).");

@@ -53,7 +53,7 @@ while($util = mysql_fetch_array($All_util))
 {
   ?>
 
-      <a class="item item-thumbnail-left" href="detail-photo.php??id=<?php echo $util['id_media']; ?>">
+      <a class="item item-thumbnail-left" href="detail-photo.php?id=<?php echo $util['id_media']; ?>">
         <img src="<?php echo $util['lien_media']; ?>">
         <h2><?php echo $util['type']; ?></h2>
         <p><?php echo $util['description_media']; ?></p>
