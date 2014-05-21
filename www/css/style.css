@@ -7,6 +7,12 @@ a {
   padding:0 10px;
 }
 
+.padError{
+  padding:0 10px;
+  color: red;
+  text-align: center;
+}
+
 .radiusCustom{
   -webkit-border-radius: 15px;
 -moz-border-radius: 15px;

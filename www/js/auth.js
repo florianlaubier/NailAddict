@@ -43,7 +43,7 @@ $(document).ready(function(){
 
   //redirection vers la page de connexion
   $('#recoBtn').click(function(){
-      window.location.href = 'index.php';
+      window.location.href = 'decoMess.php';
   });
 
   // redirection vers l'inscription

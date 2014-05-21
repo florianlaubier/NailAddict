@@ -15,7 +15,6 @@
 
 
       <div class="list">
-        <p>Vous avez été déconnecté avec succès.</p>
         <img src="img/nail.png">
         <label class="item item-input">
           <span class="input-label">Username</span>

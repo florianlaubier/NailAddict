@@ -1,6 +1,7 @@
 <?php
   require_once("header.php");
-  require_once("connexion.php"); ?>
+  require_once("connexion.php");
+?>
 
 <body ng-app="starter" class="padding-vertical">
   <ion-pane>
@@ -11,7 +12,6 @@
     </ion-header-bar>
 
     <ion-content class="index">
-
 
       <div class="list" style="text-align:left;">
 
@@ -59,14 +59,15 @@
 
           <label class="item item-input">
             <span class="input-label">Description</span>
-            <textarea id="descripUser" name="description" rows="10"></textarea>
+            <textarea id="description" name="description" rows="10"></textarea>
           </label>
 
-          <?php
+          <div class="padError">
 
+  <?php
   if(isset($_POST) && is_array($_POST) && isset($_POST['envoi_inscription']))
   {
-  
+
     $errors = array();
 
     $nom = mysql_real_escape_string(htmlspecialchars($_POST['nom']));
@@ -123,19 +124,26 @@
       mysql_query("INSERT INTO `nail`.`utilisateur`
                   (`id_user`, `nom`, `prenom`, `pseudo`, `mot_de_passe`,
                    `date_naissance`, `lien_photo`, `description_user`, `id_localisation_user`)
-            VALUES (NULL, '" . $_POST['nom'] . "', '" . $_POST['prenom'] . "', '" . $_POST['pseudo'] . "', '" . $passCrypt . "', 
-              '" . $_POST['dateNaissance'] . "', NULL, NULL, NULL)")
+            VALUES (NULL, '" . $nom . "', '" . $prenom . "', '" . $pseudo . "', '" . $passe . "',
+              '" . $_POST['dateNaissance'] . "', NULL, '" . $description . "', NULL)")
             or die(mysql_error());
 
       echo("Vous êtes bien inscrit(e).");
-    }
+
   }
+}
 ?>
-
-          <input class="button button-block button-energized" name="envoi_inscription" type="submit" value="Envoi"/>
-
+        </div>
+        <div style ="text-align:center;">
+          <input class="button button-block button-energized" name="envoi_inscription" type="submit" value="Valider"/>
+        </div>
         </form>
+
+        <button id="recoBtn" class="button button-block button-royal">
+              Se connecter
+          </button>
       </div>
+
       <div class="space-tab"></div>
     </ion-content>
 
@@ -144,5 +152,4 @@
 
 <?php
   require_once("nav.php");
-  require_once("footer.php");
-?>
+  require_once("footer.php"); ?>
