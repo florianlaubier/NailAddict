@@ -32,6 +32,7 @@ $util = mysql_fetch_assoc($All_util);
     <?php require_once("nav-profil.php");  ?>
 
       <h3 class="padCustom" style="text-align:center;" id="information">Modifier mes informations</h3>
+      <center id="rouge">* Champs obligatoires</center>
         <form id="modif_user" method="post" action="#">
           <label class="item item-input">
             <span class="input-label">Nom <span id="rouge">*</span></span>
@@ -106,10 +107,10 @@ $util = mysql_fetch_assoc($All_util);
       mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
       mysql_select_db($bdd_name) or die(mysql_error());
 
-      mysql_query("UPDATE `nail`.`utilisateur` 
-        SET `nom` = '$nom', `prenom` = '$prenom', `pseudo` = '$pseudo', 
-        `date_naissance` = '$date', `lien_photo` = '$lien', 
-        `description_user` = '$description' 
+      mysql_query("UPDATE `nail`.`utilisateur`
+        SET `nom` = '$nom', `prenom` = '$prenom', `pseudo` = '$pseudo',
+        `date_naissance` = '$date', `lien_photo` = '$lien',
+        `description_user` = '$description'
         WHERE `utilisateur`.`id_user` = $user_id;")
       or die(mysql_error());
 
@@ -119,14 +120,14 @@ $util = mysql_fetch_assoc($All_util);
   }
 ?>        </div>
 
-          <center id="rouge">* Champs obligatoires</center>
           <button id="enregistrerModifUserBtn" name="enregistrerModifUserBtn" class="button button-block button-balanced">Enregistrer </button>
 
         </form>
 
+        <form id="modif_user" method="post" action="#">
           <br/><br/>
       <h3 class="padCustom" style="text-align:center;" id="information">Modifier mon mot de passe</h3>
-
+        <center id="rouge">* Champs obligatoires</center>
           <label class="item item-input">
             <span class="input-label">Ancien mot de passe <span id="rouge">*</span></span>
             <input id="ancMdp" name="ancMdp" type="password">
@@ -139,11 +140,67 @@ $util = mysql_fetch_assoc($All_util);
 
           <label class="item item-input">
             <span class="input-label">Vérification mot de passe <span id="rouge">*</span></span>
-            <input id="newMdp" name="newMdp" type="password">
+            <input id="verifMdp" name="verifMdp" type="password">
           </label>
 
-          <center id="rouge">* Champs obligatoires</center>
-          <button id="enregistrerMdpBtn" class="button button-block button-energized">Enregistrer </button>
+        <div class="padError">
+
+  <?php
+  if(isset($_POST) && is_array($_POST) && isset($_POST['enregistrerMdpBtn']))
+  {
+
+    $errors = array();
+
+    $ancMdp = mysql_real_escape_string(htmlspecialchars($_POST['ancMdp']));
+    $newMdp = mysql_real_escape_string(htmlspecialchars($_POST['newMdp']));
+    $verifMdp = mysql_real_escape_string(htmlspecialchars($_POST['verifMdp']));
+
+
+    if(!isset($ancMdp) || $ancMdp == '')
+    {
+      $errors[] = "Ancien mot de passe obligatoire !";
+    }
+    if(!isset($newMdp) || $newMdp == '')
+    {
+      $errors[] = "Nouveau mot de passe obligatoire !";
+    }
+    if(!isset($verifMdp) || $verifMdp == '')
+    {
+      $errors[] = "Vérification mot de passe obligatoire !";
+    }
+    if($newMdp != $verifMdp)
+    {
+      $errors[] = "Les mots de passes doivent être identiques !";
+    }
+
+    foreach($errors as $error)
+    {
+      echo $error, '<br/>';
+    }
+    if(count($errors) == 0)
+    {
+
+      mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
+      mysql_select_db($bdd_name) or die(mysql_error());
+
+      $passCrypt = sha1($passe);
+      mysql_query("UPDATE `nail`.`utilisateur` SET `mot_de_passe` = '$newMdp' WHERE `utilisateur`.`id_user` = '$user_id'");
+
+      mysql_query("INSERT INTO `nail`.`utilisateur`
+                  (`id_user`, `nom`, `prenom`, `pseudo`, `mot_de_passe`,
+                   `date_naissance`, `lien_photo`, `description_user`, `id_localisation_user`)
+            VALUES (NULL, '" . $nom . "', '" . $prenom . "', '" . $pseudo . "', '" . $passe . "',
+              '" . $_POST['dateNaissance'] . "', '" . $lien_photo . "', '" . $description . "', NULL)")
+            or die(mysql_error());
+
+      echo("Modification du mot de passe réusi.");
+      echo("Veullez vous déconecter.");
+    }
+  }
+?>
+        </div>
+
+        <button id="enregistrerMdpBtn" name="enregistrerMdpBtn" class="button button-block button-energized">Enregistrer </button>
 
 <!--     <div class="item item-body ">
       <h3 id="couleur">Choix arrière plan</h3>
@@ -152,7 +209,13 @@ $util = mysql_fetch_assoc($All_util);
     <div class="item item-body ">
       <h3 id="facebook">Connexion Facebook</h3>
     </div> -->
+  </form>
+  </div>
 
+    <br/><br/>
+      <h3 class="padCustom" style="text-align:center;" id="information">Se déconecter</h3>
+    <div class="padCustom">
+    <button id="decoBtn" class="button button-block button-assertive">Déconnexion</button>
   </div>
 
 <div class="space-tab"></div>
