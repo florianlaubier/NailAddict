@@ -38,8 +38,8 @@
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Lien photo <span id="rouge">*</span></span>
-            <input id="lienPhoto" name="lien_photo" type="text">
+            <span class="input-label">Lien photo </span>
+            <input id="lienPhoto" name="lienPhoto" type="text">
           </label>
 
           <label class="item item-input">
@@ -79,7 +79,7 @@
     $prenom = mysql_real_escape_string(htmlspecialchars($_POST['prenom']));
     $pseudo = mysql_real_escape_string(htmlspecialchars($_POST['pseudo']));
     $passe = mysql_real_escape_string(htmlspecialchars($_POST['password']));
-    $passe2 = mysql_real_escape_string(htmlspecialchars($_POST['verifMdp']));
+    $passe2 = mysql_real_escape_string(htmlspecialchars($_POST['verifMdp']));  
 
     if($_POST['lienPhoto'] == '')
     {
@@ -135,11 +135,27 @@
 
       $passCrypt = sha1($passe);
 
+      // Verif si Ville existe
+      $result = mysql_query("SELECT * FROM localisation WHERE ville='$ville'");
+      $row = mysql_fetch_assoc($result);
+      if($row!=NULL || $row != "")
+      {
+        $idville = $row['id_localisation'];
+      }
+      else
+      {
+          mysql_query(" INSERT INTO localisation (ville,pays) VALUES ('" . $ville . "','France')")
+            or die(mysql_error());
+            $result = mysql_query("SELECT * FROM localisation WHERE ville='" . $ville . "'");
+            $row = mysql_fetch_assoc($result);
+            $idville = $row['id_localisation'];
+      }
+
       mysql_query("INSERT INTO `nail`.`utilisateur`
                   (`id_user`, `nom`, `prenom`, `pseudo`, `mot_de_passe`,
                    `date_naissance`, `lien_photo`, `description_user`, `id_localisation_user`)
             VALUES (NULL, '" . $nom . "', '" . $prenom . "', '" . $pseudo . "', '" . $passe . "',
-              '" . $_POST['dateNaissance'] . "', '" . $lien_photo . "', '" . $description . "', NULL)")
+              '" . $_POST['dateNaissance'] . "', '" . $lien_photo . "', '" . $description . "', '" . $idville . "' )")
             or die(mysql_error());
 
       echo("Vous êtes bien inscrit(e).");

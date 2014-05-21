@@ -57,13 +57,13 @@ $retour = array();
             </label>
 
             <label class="item item-input">
-            <span class="input-label">Lien de la photo <span id="rouge">*</span> :</span>
-              <input  id="vernis_lien" id="vernis_lien" type="text">
+            <span class="input-label">Lien de la photo<span id="rouge">*</span> :</span>
+              <input  id="vernis_lien" name="vernis_lien" type="text">
             </label>
 
             <label class="item item-input">
             <span class="input-label">Prix <span id="rouge">*</span> :</span>
-              <input  id="vernis_prix" id="vernis_prix" type="text">
+              <input  id="vernis_prix" placeholder="(Use 3.5 instead of 3,5)" name="vernis_prix" type="text">
             </label>
 
             <label class="item item-input">
@@ -89,7 +89,7 @@ $retour = array();
               $ref = mysql_real_escape_string(htmlspecialchars($_POST['vernis_ref']));
               $avis = mysql_real_escape_string(htmlspecialchars($_POST['vernis_avis']));
               $lien = $_POST['vernis_lien'];
-              $prix = mysql_real_escape_string(htmlspecialchars($$_POST['vernis_prix']));            // Val à récupérer (table prix)
+              $prix = mysql_real_escape_string(htmlspecialchars($_POST['vernis_prix']));            // Val à récupérer (table prix)
               $magasin_id = $_POST['vernis_magasin'];
               $date_courante = new Datetime();
               $date = $date_courante->format('Y-m-d');
@@ -126,9 +126,26 @@ $retour = array();
               }
               if(count($errors) == 0)
               {
+
+                // Verif si prix existe
+                $result = mysql_query("SELECT * FROM prix WHERE valeur='$prix'");
+                $row = mysql_fetch_assoc($result);
+                if($row!=NULL || $row != "")
+                {
+                  $idprix = $row['id_prix'];
+                }
+                else
+                {
+                    mysql_query(" INSERT INTO prix (valeur) VALUES ('" . $prix . "')")
+                      or die(mysql_error());
+                      $result = mysql_query("SELECT * FROM prix WHERE valeur='" . $prix . "'");
+                      $row = mysql_fetch_assoc($result);
+                      $idprix = $row['id_prix'];
+                }
+
                 // Insertion du vernis renseigné
                 $queryVernis = "INSERT INTO vernis (id_vernis, marque, texture, couleur, reference, avis, lien_vernis, id_prix_vernis, id_magasin_vernis, date_creation, valide)
-                VALUES (NULL, '$marque', '$texture', '$couleur', '$ref', '$avis', '$lien', '$prix', '$magasin_id', '$date', 0)";
+                VALUES (NULL, '$marque', '$texture', '$couleur', '$ref', '$avis', '$lien', '$idprix', '$magasin_id', '$date', 0)";
 
                 // Récupération de l'id de ce dernier
                 $insertVernis = mysql_query($queryVernis)or die(mysql_error());
