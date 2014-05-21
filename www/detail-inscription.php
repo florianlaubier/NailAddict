@@ -18,37 +18,42 @@
         <form method="post" action="#">
 
           <label class="item item-input">
-            <span class="input-label">Nom</span>
+            <span class="input-label">Nom :</span>
             <input id="nom" name="nom" type="text">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Prenom</span>
+            <span class="input-label">Prenom :</span>
             <input id="prenom" name="prenom" type="text">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Date de naissance</span>
+            <span class="input-label">Date de naissance :</span>
             <input id="dateNaissance" name="dateNaissance" type="date">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Pseudo</span>
+            <span class="input-label">Pseudo :</span>
             <input id="pseudo" name="pseudo" type="text">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Mot de passe</span>
+            <span class="input-label">Lien photo :</span>
+            <input id="lienPhoto" name="lien_photo" type="text">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Mot de passe :</span>
             <input id="password" name="password" type="password">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Vérification MDP</span>
+            <span class="input-label">Vérification MDP :</span>
             <input id="verifMdp" name="verifMdp" type="password">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Ville</span>
+            <span class="input-label">Ville :</span>
             <input id="ville" name="ville" type="text">
           </label>
 
@@ -58,7 +63,7 @@
           </label> -->
 
           <label class="item item-input">
-            <span class="input-label">Description</span>
+            <span class="input-label">Description :</span>
             <textarea id="description" name="description" rows="10"></textarea>
           </label>
 
@@ -75,6 +80,15 @@
     $pseudo = mysql_real_escape_string(htmlspecialchars($_POST['pseudo']));
     $passe = mysql_real_escape_string(htmlspecialchars($_POST['password']));
     $passe2 = mysql_real_escape_string(htmlspecialchars($_POST['verifMdp']));
+
+    if($_POST['lienPhoto'] == '')
+    {
+      $lien_photo = NULL;
+    }
+    else
+    {
+      $lien_photo = $_POST['lienPhoto'];
+    }
 
     if(isset($_POST['ville']) || $_POST['ville'] != '')
     {
@@ -125,7 +139,7 @@
                   (`id_user`, `nom`, `prenom`, `pseudo`, `mot_de_passe`,
                    `date_naissance`, `lien_photo`, `description_user`, `id_localisation_user`)
             VALUES (NULL, '" . $nom . "', '" . $prenom . "', '" . $pseudo . "', '" . $passe . "',
-              '" . $_POST['dateNaissance'] . "', NULL, '" . $description . "', NULL)")
+              '" . $_POST['dateNaissance'] . "', '" . $lien_photo . "', '" . $description . "', NULL)")
             or die(mysql_error());
 
       echo("Vous êtes bien inscrit(e).");

@@ -13,6 +13,8 @@ echo $user_id;
 $query="SELECT * FROM utilisateur WHERE id_user = $user_id";
 
 $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
+
+$util = mysql_fetch_assoc($All_util);
 ?>
 
 
@@ -25,29 +27,11 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
 
 <ion-content>
 
-<?php
-while($util = mysql_fetch_array($All_util))
-{
-  ?>
-
-  <div class="list card">
+  <div class="list padCustom" style="text-align:left; padding-top:15px;">
 
     <?php require_once("nav-profil.php");  ?>
 
-  <!--     <div class="item">
-        <a href="vue-parametres.php#informations">
-          <p>Modifier mes informations</p>
-        </a>
-        <a href="vue-parametres.php#couleur">
-          <p>Choix arrière plan</p>
-        </a>
-        <a href="vue-parametres.php#facebook">
-          <p>Connexion Facebook</p>
-        </a>
-      </div> -->
-
-    <div class="item item-body ">
-      <h3 class="padCustom" id="information">Modifier mes informations</h3>
+      <h3 class="padCustom" style="text-align:center;" id="information">Modifier mes informations</h3>
 
           <label class="item item-input">
             <span class="input-label">Nom :</span>
@@ -79,11 +63,72 @@ while($util = mysql_fetch_array($All_util))
             <input id="photo" name="photo" type="text" value="<?php echo $util['lien_photo']; ?>">
           </label>
 
-          <button id="enregistrerModifUserBtn" class="button button-block button-balanced">Enregistrer </button>
-    </div>
+          <div class="padError">
+<?php
+  if(isset($_POST) && is_array($_POST) && isset($_POST['enregistrerModifUserBtn']))
+  {
+    $errors = array();
 
-        <div class="item item-body ">
-      <h3 class="padCustom" id="information">Modifier mon mot de passe</h3>
+    $nom = mysql_real_escape_string(htmlspecialchars($_POST['nom']));
+    $prenom = mysql_real_escape_string(htmlspecialchars($_POST['prenom']));
+    $pseudo = mysql_real_escape_string(htmlspecialchars($_POST['pseudo']));
+    $date = $_POST['dateNaissance'];
+
+    if(isset($_POST['ville']) || $_POST['ville'] != '')
+    {
+      $ville = mysql_real_escape_string(htmlspecialchars($_POST['ville']));
+    }
+    if(isset($_POST['description']) || $_POST['description'] != '')
+    {
+      $description = mysql_real_escape_string(htmlspecialchars($_POST['description']));
+    }
+    if(!isset($nom) || $nom == '')
+    {
+      $errors[] = "Nom obligatoire !";
+    }
+    if(!isset($prenom) || $prenom == '')
+    {
+      $errors[] = "Prénom obligatoire !";
+    }
+    if(!isset($_POST['dateNaissance']) || $_POST['dateNaissance'] == '')
+    {
+      $errors[] = "Date de naissance est obligatoire !";
+    }
+    if(!isset($pseudo) || $pseudo == '')
+    {
+      $errors[] = "Pseudo obligatoire !";
+    }
+
+    foreach($errors as $error)
+    {
+      echo $error, '<br/>';
+    }
+    if(count($errors) == 0)
+    {
+
+      mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
+      mysql_select_db($bdd_name) or die(mysql_error());
+
+      $passCrypt = sha1($passe);
+      mysql_query("UPDATE `nail`.`utilisateur` SET `nom` = '$nom', `prenom` = '$prenom', `pseudo` = '$pseudo', `date_naissance` = '$date', `lien_photo` = '$lien', `description_user` = 'aa' WHERE `utilisateur`.`id_user` = 5;");
+
+      mysql_query("INSERT INTO `nail`.`utilisateur`
+                  (`id_user`, `nom`, `prenom`, `pseudo`, `mot_de_passe`,
+                   `date_naissance`, `lien_photo`, `description_user`, `id_localisation_user`)
+            VALUES (NULL, '" . $nom . "', '" . $prenom . "', '" . $pseudo . "', '" . $passe . "',
+              '" . $_POST['dateNaissance'] . "', NULL, '" . $description . "', NULL)")
+            or die(mysql_error());
+
+      echo("Modification(s) Acceptée(s).");
+    }
+  }
+?>        </div>
+
+          <button id="enregistrerModifUserBtn" class="button button-block button-balanced">Enregistrer </button>
+
+
+          <br/><br/>
+      <h3 class="padCustom" style="text-align:center;" id="information">Modifier mon mot de passe</h3>
 
           <label class="item item-input">
             <span class="input-label">Ancien mot de passe :</span>
@@ -101,7 +146,6 @@ while($util = mysql_fetch_array($All_util))
           </label>
 
           <button id="enregistrerMdpBtn" class="button button-block button-energized">Enregistrer </button>
-    </div>
 
 <!--     <div class="item item-body ">
       <h3 id="couleur">Choix arrière plan</h3>
@@ -112,10 +156,6 @@ while($util = mysql_fetch_array($All_util))
     </div> -->
 
   </div>
-
-  <?php
-};
-?>
 
 <div class="space-tab"></div>
 

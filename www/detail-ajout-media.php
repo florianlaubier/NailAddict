@@ -58,6 +58,7 @@ $retour = array();
     $date_courante = new Datetime();
     $date = $date_courante->format('Y-m-d');
 
+    echo
 // Insertion du vernis renseigné
     mysql_query("INSERT INTO `nail`.`media` (`id_media`, `lien_media`, `type`, `description_media`, `date_creation`, `id_user`, `valide`) VALUES (NULL, '$lien', '$type', '$descriptionMedia', '$date', '$user_id', '0')")
             or die(mysql_error());

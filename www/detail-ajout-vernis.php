@@ -53,7 +53,7 @@ $retour = array();
 
             <label class="item item-input">
             <span class="input-label">Avis :</span>
-              <textarea id="vernis_avis"  name="vernis_avis" rows="10" type="text" value="" required></textarea>
+              <textarea id="vernis_avis"  name="vernis_avis" rows="10" type="text" required></textarea>
             </label>
 
             <label class="item item-input">
