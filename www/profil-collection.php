@@ -26,7 +26,7 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
 
 
 <div class="list card">
-    <div class="item item-avatar">
+    <div class="item item-avatar item-royal">
       <?php
         if($_SESSION['user']['lien_photo']!=null)
           {?>
