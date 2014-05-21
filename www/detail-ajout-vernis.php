@@ -87,11 +87,12 @@ $retour = array();
                 }
                 else
                 {
-                    mysql_query(" INSERT INTO prix (valeur) VALUES ('" . $prix . "')")
+                      $resquery= mysql_query(" INSERT INTO prix (id_prix, valeur) VALUES (NULL,'" . $prix . "')")
                       or die(mysql_error());
 
-                      $resultP = mysql_query("SELECT * FROM prix WHERE valeur='$prix'");
-                      $rowP = mysql_fetch_array($resultP);
+                      $prix= addslashes($prix);
+                      $resultP = mysql_query("SELECT * FROM prix WHERE valeur=$prix");
+                      $rowP = mysql_fetch_assoc($resultP);                    
                       $idprix = $rowP['id_prix'];
                 }
 
