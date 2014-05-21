@@ -14,7 +14,7 @@ mysql_select_db($bdd_name) or die(mysql_error());
   <ion-pane>
 
   <ion-header-bar class="bar-stable">
-  <h1 class="title">Media</h1>
+  <h1 class="title">Médias</h1>
 </ion-header-bar>
 
 <ion-content>
@@ -25,7 +25,7 @@ mysql_select_db($bdd_name) or die(mysql_error());
 if ($isAuthOK) {
 
 $user_id = $_SESSION['user']['id_user'];
-$query="SELECT * FROM  media WHERE id_user = $user_id ORDER BY date_creation";
+$query="SELECT * FROM  media WHERE id_user = $user_id && valide ='1' ORDER BY date_creation";
 $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
 
   ?>

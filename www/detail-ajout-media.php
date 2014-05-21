@@ -26,27 +26,7 @@ $retour = array();
 
     <?php require_once("nav-profil.php");  ?>
 
-      <form id="ajout_medio" method="post" action="#">
-
-            <label class="item item-input">
-            <span class="input-label">Type de média <span id="rouge">*</span> :</span>
-                <select id="type_media" name="type_media">
-                  <option value="photo">photo</option>
-                  <option value="video">video</option>
-              </select>
-            </label>
-
-            <label class="item item-input">
-            <span class="input-label">Lien du média <span id="rouge">*</span> :</span>
-              <input  id="lienMedia" name="lienMedia" type="text">
-            </label>
-
-            <label class="item item-input">
-            <span class="input-label">Description du média <span id="rouge">*</span> :</span>
-              <textarea id="descriptionMedia" name="descriptionMedia" rows="10" type="text"></textarea>
-            </label>
-
-        <div class="padError">
+            <div class="padError">
           <?php
             if(isset($_POST) && is_array($_POST) && isset($_POST['ajoutMedia_Btn']))
             {
@@ -81,12 +61,32 @@ $retour = array();
                         or die(mysql_error());
 
 
-                echo "Vernis ajouté avec succés";
+                echo "Media ajouté avec succés";
               }
 
             }
           ?>
         </div>
+
+      <form id="ajout_medio" method="post" action="#">
+
+            <label class="item item-input">
+            <span class="input-label">Type de média <span id="rouge">*</span> :</span>
+                <select id="type_media" name="type_media">
+                  <option value="photo">photo</option>
+                  <option value="video">video</option>
+              </select>
+            </label>
+
+            <label class="item item-input">
+            <span class="input-label">Lien du média <span id="rouge">*</span> :</span>
+              <input  id="lienMedia" name="lienMedia" type="text">
+            </label>
+
+            <label class="item item-input">
+            <span class="input-label">Description du média <span id="rouge">*</span> :</span>
+              <textarea id="descriptionMedia" name="descriptionMedia" rows="10" type="text"></textarea>
+            </label>
 
         <center id="rouge"> * Champs obligatoires</center>
         <input class="button button-block button-energized" id="ajoutMedia_Btn" name="ajoutMedia_Btn" type="submit" value="Envoi"/>

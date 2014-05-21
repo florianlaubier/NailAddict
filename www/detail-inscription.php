@@ -15,59 +15,7 @@
 
       <div class="list" style="text-align:left;">
 
-        <form method="post" action="#">
-
-          <label class="item item-input">
-            <span class="input-label">Nom <span id="rouge">*</span></span>
-            <input id="nom" name="nom" type="text">
-          </label>
-
-          <label class="item item-input">
-            <span class="input-label">Prénom <span id="rouge">*</span></span>
-            <input id="prenom" name="prenom" type="text">
-          </label>
-
-          <label class="item item-input">
-            <span class="input-label">Date de naissance <span id="rouge">*</span></span>
-            <input id="dateNaissance" name="dateNaissance" type="date">
-          </label>
-
-          <label class="item item-input">
-            <span class="input-label">Pseudo <span id="rouge">*</span></span>
-            <input id="pseudo" name="pseudo" type="text">
-          </label>
-
-          <label class="item item-input">
-            <span class="input-label">Lien photo </span>
-            <input id="lienPhoto" name="lienPhoto" type="text">
-          </label>
-
-          <label class="item item-input">
-            <span class="input-label">Mot de passe <span id="rouge">*</span></span>
-            <input id="password" name="password" type="password">
-          </label>
-
-          <label class="item item-input">
-            <span class="input-label">Vérification MDP <span id="rouge">*</span></span>
-            <input id="verifMdp" name="verifMdp" type="password">
-          </label>
-
-          <label class="item item-input">
-            <span class="input-label">Ville :</span>
-            <input id="ville" name="ville" type="text">
-          </label>
-
-<!--           <label class="item item-input">
-            <span class="input-label">Photo</span>
-            <input id="photoUser" name="photoUser" type="image">
-          </label> -->
-
-          <label class="item item-input">
-            <span class="input-label">Description :</span>
-            <textarea id="description" name="description" rows="10"></textarea>
-          </label>
-
-          <div class="padError">
+        <div class="padError">
 
   <?php
   if(isset($_POST) && is_array($_POST) && isset($_POST['envoi_inscription']))
@@ -79,7 +27,7 @@
     $prenom = mysql_real_escape_string(htmlspecialchars($_POST['prenom']));
     $pseudo = mysql_real_escape_string(htmlspecialchars($_POST['pseudo']));
     $passe = mysql_real_escape_string(htmlspecialchars($_POST['password']));
-    $passe2 = mysql_real_escape_string(htmlspecialchars($_POST['verifMdp']));  
+    $passe2 = mysql_real_escape_string(htmlspecialchars($_POST['verifMdp']));
 
     if($_POST['lienPhoto'] == '')
     {
@@ -164,6 +112,59 @@
   }
 ?>
         </div>
+
+        <form method="post" action="#">
+
+          <label class="item item-input">
+            <span class="input-label">Nom <span id="rouge">*</span></span>
+            <input id="nom" name="nom" type="text">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Prénom <span id="rouge">*</span></span>
+            <input id="prenom" name="prenom" type="text">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Date de naissance <span id="rouge">*</span></span>
+            <input id="dateNaissance" name="dateNaissance" type="date">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Pseudo <span id="rouge">*</span></span>
+            <input id="pseudo" name="pseudo" type="text">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Lien photo </span>
+            <input id="lienPhoto" name="lienPhoto" type="text">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Mot de passe <span id="rouge">*</span></span>
+            <input id="password" name="password" type="password">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Vérification MDP <span id="rouge">*</span></span>
+            <input id="verifMdp" name="verifMdp" type="password">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Ville :</span>
+            <input id="ville" name="ville" type="text">
+          </label>
+
+<!--           <label class="item item-input">
+            <span class="input-label">Photo</span>
+            <input id="photoUser" name="photoUser" type="image">
+          </label> -->
+
+          <label class="item item-input">
+            <span class="input-label">Description :</span>
+            <textarea id="description" name="description" rows="10"></textarea>
+          </label>
+
         <div style ="text-align:center;">
           <input class="button button-block button-energized" name="envoi_inscription" type="submit" value="Valider"/>
         </div>

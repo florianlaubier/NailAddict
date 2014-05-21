@@ -28,56 +28,7 @@ $retour = array();
     <div class="list padCustom" style="text-align:left; padding-top:15px;">
 
     <?php require_once("nav-profil.php");  ?>
-
-      <form id="ajout_vernis" method="post" action="#">
-
-            <label class="item item-input">
-            <span class="input-label">Marque <span id="rouge">*</span> :</span>
-              <input id="vernis_marque" name="vernis_marque" type="text">
-            </label>
-
-            <label class="item item-input">
-            <span class="input-label">Texture <span id="rouge">*</span> :</span>
-              <input  id="vernis_texture" name="vernis_texture" type="text">
-            </label>
-
-            <label class="item item-input">
-            <span class="input-label">Couleur <span id="rouge">*</span> :</span>
-              <input id="vernis_couleur" name="vernis_couleur" type="text">
-            </label>
-
-            <label class="item item-input">
-            <span class="input-label">Référence <span id="rouge">*</span> :</span>
-              <input  id="vernis_ref" name="vernis_ref" type="text">
-            </label>
-
-            <label class="item item-input">
-            <span class="input-label">Avis :</span>
-              <textarea id="vernis_avis"  name="vernis_avis" rows="10" type="text"></textarea>
-            </label>
-
-            <label class="item item-input">
-            <span class="input-label">Lien de la photo<span id="rouge">*</span> :</span>
-              <input  id="vernis_lien" name="vernis_lien" type="text">
-            </label>
-
-            <label class="item item-input">
-            <span class="input-label">Prix <span id="rouge">*</span> :</span>
-              <input  id="vernis_prix" placeholder="(Use 3.5 instead of 3,5)" name="vernis_prix" type="text">
-            </label>
-
-            <label class="item item-input">
-            <span class="input-label">Magasin <span id="rouge">*</span> :</span>
-              <select id="vernis_magasin" name="vernis_magasin">
-
-              <?php while($tab_mag = mysql_fetch_array($All_mag)){ ?>
-                <option value="<?php echo $tab_mag['id_magasin'] ?>"> <?php echo $tab_mag['nom_magasin'] ?> </option>
-             <?php } ?>
-
-              </select>
-            </label>
-
-        <div class="padError">
+                <div class="padError">
           <?php
             if(isset($_POST) && is_array($_POST) && isset($_POST['ajoutVernis_Btn']))
             {
@@ -153,10 +104,10 @@ $retour = array();
 
                 // Si l'insertion a fonctionné
                 if ( $insertVernis == TRUE )
-                {                  
-                  
+                {
+
                     echo "Vernis ajouté avec succés";
-                 
+
                 }
                 else
                 {
@@ -166,6 +117,53 @@ $retour = array();
             }
           ?>
         </div>
+      <form id="ajout_vernis" method="post" action="#">
+
+            <label class="item item-input">
+            <span class="input-label">Marque <span id="rouge">*</span> :</span>
+              <input id="vernis_marque" name="vernis_marque" type="text">
+            </label>
+
+            <label class="item item-input">
+            <span class="input-label">Texture <span id="rouge">*</span> :</span>
+              <input  id="vernis_texture" name="vernis_texture" type="text">
+            </label>
+
+            <label class="item item-input">
+            <span class="input-label">Couleur <span id="rouge">*</span> :</span>
+              <input id="vernis_couleur" name="vernis_couleur" type="text">
+            </label>
+
+            <label class="item item-input">
+            <span class="input-label">Référence <span id="rouge">*</span> :</span>
+              <input  id="vernis_ref" name="vernis_ref" type="text">
+            </label>
+
+            <label class="item item-input">
+            <span class="input-label">Avis :</span>
+              <textarea id="vernis_avis"  name="vernis_avis" rows="10" type="text"></textarea>
+            </label>
+
+            <label class="item item-input">
+            <span class="input-label">Lien de la photo<span id="rouge">*</span> :</span>
+              <input  id="vernis_lien" name="vernis_lien" type="text">
+            </label>
+
+            <label class="item item-input">
+            <span class="input-label">Prix <span id="rouge">*</span> :</span>
+              <input  id="vernis_prix" placeholder="(Use 3.5 instead of 3,5)" name="vernis_prix" type="text">
+            </label>
+
+            <label class="item item-input">
+            <span class="input-label">Magasin <span id="rouge">*</span> :</span>
+              <select id="vernis_magasin" name="vernis_magasin">
+
+              <?php while($tab_mag = mysql_fetch_array($All_mag)){ ?>
+                <option value="<?php echo $tab_mag['id_magasin'] ?>"> <?php echo $tab_mag['nom_magasin'] ?> </option>
+             <?php } ?>
+
+              </select>
+            </label>
 
         <center id="rouge">* Champs obligatoires</center>
         <input class="button button-block button-energized" id="ajoutVernis_Btn" name="ajoutVernis_Btn" type="submit" value="Envoi"/>

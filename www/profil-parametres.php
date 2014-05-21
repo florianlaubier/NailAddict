@@ -32,38 +32,8 @@ $util = mysql_fetch_assoc($All_util);
     <?php require_once("nav-profil.php");  ?>
 
       <h3 class="padCustom" style="text-align:center;" id="information">Modifier mes informations</h3>
-        <form id="modif_user" method="post" action="#">
-          <label class="item item-input">
-            <span class="input-label">Nom <span id="rouge">*</span></span>
-            <input id="nom" name="nom" type="text" value="<?php echo $util['nom']; ?>">
-          </label>
 
-          <label class="item item-input">
-            <span class="input-label">Prénom <span id="rouge">*</span></span>
-            <input id="prenom" name="prenom" type="text" value="<?php echo $util['prenom']; ?>">
-          </label>
-
-          <label class="item item-input">
-            <span class="input-label">Pseudo <span id="rouge">*</span></span>
-            <input id="pseudo" name="pseudo" type="text" value="<?php echo $util['pseudo']; ?>">
-          </label>
-
-          <label class="item item-input">
-            <span class="input-label">Date de naissance</span>
-            <input id="dateNaissance" name="dateNaissance" type="date" value="<?php echo $util['date_naissance']; ?>">
-          </label>
-
-          <label class="item item-input">
-            <span class="input-label">Description</span>
-            <input id="description" name="description" type="text" value="<?php echo $util['description_user']; ?>">
-          </label>
-
-          <label class="item item-input">
-            <span class="input-label">Photo de profil </span>
-            <input id="lienPhoto" name="lienPhoto" type="text" value="<?php echo $util['lien_photo']; ?>">
-          </label>
-
-          <div class="padError">
+              <div class="padError">
 <?php
   if(isset($_POST) && is_array($_POST) && isset($_POST['enregistrerModifUserBtn']))
   {
@@ -106,10 +76,10 @@ $util = mysql_fetch_assoc($All_util);
       mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
       mysql_select_db($bdd_name) or die(mysql_error());
 
-      mysql_query("UPDATE `nail`.`utilisateur` 
-        SET `nom` = '$nom', `prenom` = '$prenom', `pseudo` = '$pseudo', 
-        `date_naissance` = '$date', `lien_photo` = '$lien', 
-        `description_user` = '$description' 
+      mysql_query("UPDATE `nail`.`utilisateur`
+        SET `nom` = '$nom', `prenom` = '$prenom', `pseudo` = '$pseudo',
+        `date_naissance` = '$date', `lien_photo` = '$lien',
+        `description_user` = '$description'
         WHERE `utilisateur`.`id_user` = $user_id;")
       or die(mysql_error());
 
@@ -119,6 +89,37 @@ $util = mysql_fetch_assoc($All_util);
   }
 ?>        </div>
 
+        <form id="modif_user" method="post" action="#">
+          <label class="item item-input">
+            <span class="input-label">Nom <span id="rouge">*</span></span>
+            <input id="nom" name="nom" type="text" value="<?php echo $util['nom']; ?>">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Prénom <span id="rouge">*</span></span>
+            <input id="prenom" name="prenom" type="text" value="<?php echo $util['prenom']; ?>">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Pseudo <span id="rouge">*</span></span>
+            <input id="pseudo" name="pseudo" type="text" value="<?php echo $util['pseudo']; ?>">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Date de naissance</span>
+            <input id="dateNaissance" name="dateNaissance" type="date" value="<?php echo $util['date_naissance']; ?>">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Description</span>
+            <input id="description" name="description" type="text" value="<?php echo $util['description_user']; ?>">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Photo de profil </span>
+            <input id="lienPhoto" name="lienPhoto" type="text" value="<?php echo $util['lien_photo']; ?>">
+          </label>
+
           <center id="rouge">* Champs obligatoires</center>
           <button id="enregistrerModifUserBtn" name="enregistrerModifUserBtn" class="button button-block button-balanced">Enregistrer </button>
 
@@ -127,6 +128,56 @@ $util = mysql_fetch_assoc($All_util);
           <br/><br/>
       <h3 class="padCustom" style="text-align:center;" id="information">Modifier mon mot de passe</h3>
 
+      <div class="padError">
+<?php
+    if(isset($_POST) && is_array($_POST) && isset($_POST['enregistrerMdpBtn']))
+   {
+
+     $errors = array();
+
+     $ancMdp = mysql_real_escape_string(htmlspecialchars($_POST['ancMdp']));
+     $newMdp = mysql_real_escape_string(htmlspecialchars($_POST['newMdp']));
+     $verifMdp = mysql_real_escape_string(htmlspecialchars($_POST['verifMdp']));
+
+
+     if(!isset($ancMdp) || $ancMdp == '')
+     {
+       $errors[] = "Ancien mot de passe obligatoire !";
+     }
+     if(!isset($newMdp) || $newMdp == '')
+     {
+       $errors[] = "Nouveau mot de passe obligatoire !";
+     }
+     if(!isset($verifMdp) || $verifMdp == '')
+     {
+      $errors[] = "Vérification mot de passe obligatoire !";
+     }
+     if($newMdp != $verifMdp)
+     {
+       $errors[] = "Les mots de passes doivent être identiques !";
+     }
+
+    foreach($errors as $error)
+     {
+       echo $error, '<br/>';
+     }
+     if(count($errors) == 0)
+     {
+
+       mysql_connect($bdd_server, $bdd_user, $bdd_pass) or die(mysql_error());
+       mysql_select_db($bdd_name) or die(mysql_error());
+
+       $passCrypt = sha1($passe);
+       mysql_query("UPDATE `nail`.`utilisateur` SET `mot_de_passe` = '$newMdp' WHERE `utilisateur`.`id_user` = '$user_id'");
+
+       echo("Modification du mot de passe réusi.");
+       echo("Veullez vous déconecter.");
+     }
+  }
+?>
+      </div>
+
+      <form id="modif_mdp" method="post" action="#">
           <label class="item item-input">
             <span class="input-label">Ancien mot de passe <span id="rouge">*</span></span>
             <input id="ancMdp" name="ancMdp" type="password">
@@ -139,12 +190,12 @@ $util = mysql_fetch_assoc($All_util);
 
           <label class="item item-input">
             <span class="input-label">Vérification mot de passe <span id="rouge">*</span></span>
-            <input id="newMdp" name="newMdp" type="password">
+            <input id="verifMdp" name="verifMdp" type="password">
           </label>
 
           <center id="rouge">* Champs obligatoires</center>
-          <button id="enregistrerMdpBtn" class="button button-block button-energized">Enregistrer </button>
-
+          <button id="enregistrerMdpBtn" name="enregistrerMdpBtn" class="button button-block button-energized">Enregistrer </button>
+      </form>
 <!--     <div class="item item-body ">
       <h3 id="couleur">Choix arrière plan</h3>
     </div>

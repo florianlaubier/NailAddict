@@ -10,7 +10,7 @@ mysql_select_db($bdd_name) or die(mysql_error());
 
 $user_id = $_SESSION['user']['id_user'];
 echo $user_id;
-$query="SELECT * FROM utilisateur JOIN collection on utilisateur.id_user = collection.id_user JOIN vernis on collection.id_vernis= vernis.id_vernis WHERE utilisateur.id_user = $user_id ORDER BY vernis.marque";
+$query="SELECT * FROM utilisateur JOIN collection on utilisateur.id_user = collection.id_user JOIN vernis on collection.id_vernis= vernis.id_vernis WHERE utilisateur.id_user = $user_id && valide = '1' ORDER BY vernis.marque";
 
 $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<br /><br />" . mysql_error());
 ?>
