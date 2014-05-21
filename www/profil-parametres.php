@@ -32,34 +32,34 @@ $util = mysql_fetch_assoc($All_util);
     <?php require_once("nav-profil.php");  ?>
 
       <h3 class="padCustom" style="text-align:center;" id="information">Modifier mes informations</h3>
-
+        <form id="modif_user" method="post" action="#">
           <label class="item item-input">
-            <span class="input-label">Nom :</span>
+            <span class="input-label">Nom <span id="rouge">*</span></span>
             <input id="nom" name="nom" type="text" value="<?php echo $util['nom']; ?>">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Prénom :</span>
+            <span class="input-label">Prénom <span id="rouge">*</span></span>
             <input id="prenom" name="prenom" type="text" value="<?php echo $util['prenom']; ?>">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Pseudo :</span>
+            <span class="input-label">Pseudo <span id="rouge">*</span></span>
             <input id="pseudo" name="pseudo" type="text" value="<?php echo $util['pseudo']; ?>">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Date de naissance :</span>
+            <span class="input-label">Date de naissance</span>
             <input id="dateNaissance" name="dateNaissance" type="date" value="<?php echo $util['date_naissance']; ?>">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Description :</span>
+            <span class="input-label">Description</span>
             <input id="description" name="description" type="text" value="<?php echo $util['description_user']; ?>">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Photo de profil :</span>
+            <span class="input-label">Photo de profil </span>
             <input id="photo" name="photo" type="text" value="<?php echo $util['lien_photo']; ?>">
           </label>
 
@@ -73,6 +73,7 @@ $util = mysql_fetch_assoc($All_util);
     $prenom = mysql_real_escape_string(htmlspecialchars($_POST['prenom']));
     $pseudo = mysql_real_escape_string(htmlspecialchars($_POST['pseudo']));
     $date = $_POST['dateNaissance'];
+    $lien = $_POST['lienPhoto'];
 
     if(isset($_POST['ville']) || $_POST['ville'] != '')
     {
@@ -110,41 +111,40 @@ $util = mysql_fetch_assoc($All_util);
       mysql_select_db($bdd_name) or die(mysql_error());
 
       $passCrypt = sha1($passe);
-      mysql_query("UPDATE `nail`.`utilisateur` SET `nom` = '$nom', `prenom` = '$prenom', `pseudo` = '$pseudo', `date_naissance` = '$date', `lien_photo` = '$lien', `description_user` = 'aa' WHERE `utilisateur`.`id_user` = 5;");
 
-      mysql_query("INSERT INTO `nail`.`utilisateur`
-                  (`id_user`, `nom`, `prenom`, `pseudo`, `mot_de_passe`,
-                   `date_naissance`, `lien_photo`, `description_user`, `id_localisation_user`)
-            VALUES (NULL, '" . $nom . "', '" . $prenom . "', '" . $pseudo . "', '" . $passe . "',
-              '" . $_POST['dateNaissance'] . "', NULL, '" . $description . "', NULL)")
-            or die(mysql_error());
+      mysql_query("UPDATE `nail`.`utilisateur` SET `nom` = '$nom', `prenom` = '$prenom', `pseudo` = '$pseudo', `date_naissance` = '$date', `lien_photo` = '$lien', `description_user` = '$description' WHERE `utilisateur`.`id_user` = $user_id;")
+      or die(mysql_error());
 
       echo("Modification(s) Acceptée(s).");
+
     }
   }
 ?>        </div>
 
-          <button id="enregistrerModifUserBtn" class="button button-block button-balanced">Enregistrer </button>
+          <center id="rouge">* Champs obligatoires</center>
+          <button id="enregistrerModifUserBtn" name="enregistrerModifUserBtn" class="button button-block button-balanced">Enregistrer </button>
 
+        </form>
 
           <br/><br/>
       <h3 class="padCustom" style="text-align:center;" id="information">Modifier mon mot de passe</h3>
 
           <label class="item item-input">
-            <span class="input-label">Ancien mot de passe :</span>
+            <span class="input-label">Ancien mot de passe <span id="rouge">*</span></span>
             <input id="ancMdp" name="ancMdp" type="password">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Nouveaux mot de passe :</span>
+            <span class="input-label">Nouveau mot de passe <span id="rouge">*</span></span>
             <input id="newMdp" name="newMdp" type="password">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Vérification mot de passe :</span>
+            <span class="input-label">Vérification mot de passe <span id="rouge">*</span></span>
             <input id="newMdp" name="newMdp" type="password">
           </label>
 
+          <center id="rouge">* Champs obligatoires</center>
           <button id="enregistrerMdpBtn" class="button button-block button-energized">Enregistrer </button>
 
 <!--     <div class="item item-body ">

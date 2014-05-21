@@ -18,37 +18,37 @@
         <form method="post" action="#">
 
           <label class="item item-input">
-            <span class="input-label">Nom :</span>
+            <span class="input-label">Nom <span id="rouge">*</span></span>
             <input id="nom" name="nom" type="text">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Prenom :</span>
+            <span class="input-label">Prénom <span id="rouge">*</span></span>
             <input id="prenom" name="prenom" type="text">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Date de naissance :</span>
+            <span class="input-label">Date de naissance <span id="rouge">*</span></span>
             <input id="dateNaissance" name="dateNaissance" type="date">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Pseudo :</span>
+            <span class="input-label">Pseudo <span id="rouge">*</span></span>
             <input id="pseudo" name="pseudo" type="text">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Lien photo :</span>
+            <span class="input-label">Lien photo <span id="rouge">*</span></span>
             <input id="lienPhoto" name="lien_photo" type="text">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Mot de passe :</span>
+            <span class="input-label">Mot de passe <span id="rouge">*</span></span>
             <input id="password" name="password" type="password">
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Vérification MDP :</span>
+            <span class="input-label">Vérification MDP <span id="rouge">*</span></span>
             <input id="verifMdp" name="verifMdp" type="password">
           </label>
 
@@ -144,8 +144,8 @@
 
       echo("Vous êtes bien inscrit(e).");
 
+    }
   }
-}
 ?>
         </div>
         <div style ="text-align:center;">

@@ -99,3 +99,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8989', end
   color: white;
   font-weight: bold;
 }
+
+/* Champs obligatoires */ 
+#rouge {
+  color: red;
+}

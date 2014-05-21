@@ -46,7 +46,7 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
     <a class="item item-thumbnail-left" href="detail-ajout-media.php">
         <img src="img/more.png">
         <h2>Ajouter</h2>
-        <p>un vernis</p>
+        <p>un média</p>
       </a>
 <?php
 while($util = mysql_fetch_array($All_util))
