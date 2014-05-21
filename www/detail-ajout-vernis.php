@@ -25,7 +25,7 @@ $retour = array();
 
 <ion-content>
 
-    <div class="list" style="text-align:left;">
+    <div class="list padCustom" style="text-align:left; padding-top:15px;">
 
     <?php require_once("nav-profil.php");  ?>
 
