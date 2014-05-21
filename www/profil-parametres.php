@@ -47,29 +47,60 @@ while($util = mysql_fetch_array($All_util))
       </div> -->
 
     <div class="item item-body ">
-      <h3 id="information">Modifier mes informations</h3>
-        <fieldset>
-          <p> Nom :
-            <input value="<?php echo $util['nom']; ?>"></input>
-          </p>
-          <p> Prénom :
-            <input value="<?php echo $util['prenom']; ?>"></input>
-          </p>
-          <p> Pseudo :
-            <input value="<?php echo $util['pseudo']; ?>"></input>
-          </p>
-          <p> Date de naissance :
-            <input value="<?php echo $util['date_naissance']; ?>"></input>
-          </p>
-          <p> Description :
-            <input value="<?php echo $util['description_user']; ?>"></input>
-          </p>
-          <p> Changer ma photo de profil :
-            <input value="<?php echo $util['lien_photo']; ?>"></input>
-          </p>
+      <h3 class="padCustom" id="information">Modifier mes informations</h3>
 
-          <button id="enregistrerBtn" class="button button-block button-royal">Enregistrer </button>
-        </fieldset>
+          <label class="item item-input">
+            <span class="input-label">Nom :</span>
+            <input id="nom" name="nom" type="text" value="<?php echo $util['nom']; ?>">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Prénom :</span>
+            <input id="prenom" name="prenom" type="text" value="<?php echo $util['prenom']; ?>">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Pseudo :</span>
+            <input id="pseudo" name="pseudo" type="text" value="<?php echo $util['pseudo']; ?>">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Date de naissance :</span>
+            <input id="dateNaissance" name="dateNaissance" type="date" value="<?php echo $util['date_naissance']; ?>">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Description :</span>
+            <input id="description" name="description" type="text" value="<?php echo $util['description_user']; ?>">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Photo de profil :</span>
+            <input id="photo" name="photo" type="text" value="<?php echo $util['lien_photo']; ?>">
+          </label>
+
+          <button id="enregistrerModifUserBtn" class="button button-block button-balanced">Enregistrer </button>
+    </div>
+
+        <div class="item item-body ">
+      <h3 class="padCustom" id="information">Modifier mon mot de passe</h3>
+
+          <label class="item item-input">
+            <span class="input-label">Ancien mot de passe :</span>
+            <input id="ancMdp" name="ancMdp" type="password">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Nouveaux mot de passe :</span>
+            <input id="newMdp" name="newMdp" type="password">
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Vérification mot de passe :</span>
+            <input id="newMdp" name="newMdp" type="password">
+          </label>
+
+          <button id="enregistrerMdpBtn" class="button button-block button-energized">Enregistrer </button>
     </div>
 
 <!--     <div class="item item-body ">

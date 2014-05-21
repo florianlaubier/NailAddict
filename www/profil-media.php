@@ -14,7 +14,7 @@ mysql_select_db($bdd_name) or die(mysql_error());
   <ion-pane>
 
   <ion-header-bar class="bar-stable">
-  <h1 class="title">Profil</h1>
+  <h1 class="title">Media</h1>
 </ion-header-bar>
 
 <ion-content>
@@ -43,6 +43,11 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
 
     <?php require_once("nav-profil.php"); ?>
 
+    <a class="item item-thumbnail-left" href="detail-ajout-media.php">
+        <img src="img/more.png">
+        <h2>Ajouter</h2>
+        <p>un vernis</p>
+      </a>
 <?php
 while($util = mysql_fetch_array($All_util))
 {

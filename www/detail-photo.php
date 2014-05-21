@@ -18,7 +18,7 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
   <ion-pane>
 
   <ion-header-bar class="bar-stable">
-  <h1 class="title">Photo</h1>
+  <h1 class="title">Media</h1>
 </ion-header-bar>
 
 <ion-content>
@@ -29,11 +29,6 @@ while($util = mysql_fetch_array($All_util))
   ?>
 
   <div class="list card">
-
-    <div class="item item-avatar">
-      <img src="img/doudou.png">
-      <h2>Mathou</h2>
-    </div>
 
     <?php require_once("nav-profil.php"); ?>
 

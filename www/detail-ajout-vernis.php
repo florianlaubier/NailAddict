@@ -31,12 +31,6 @@ $retour = array();
 
       <form id="ajout_vernis" method="post" action="#">
 
-          <label class="item item-input">
-            <span class="input-label">Marque</span>
-            <input id="nom" name="nom" type="text">
-          </label>
-
-
             <label class="item item-input">
             <span class="input-label">Marque :</span>
               <input id="vernis_marque" name="vernis_marque" type="text" value="" required>
@@ -104,14 +98,13 @@ $retour = array();
 
 
 // Insertion du vernis renseigné
-    $queryVernis = "INSERT INTO vernis (id_vernis, marque, texture, couleur, reference, avis, lien_vernis, id_prix_vernis, id_magasin_vernis, date_creation, valide) VALUES ('', '$marque', '$texture', '$couleur', '$ref', '$avis', '$lien', '$prix', '$magasin_id', '$date', 0)";
+    $queryVernis = "INSERT INTO vernis (id_vernis, marque, texture, couleur, reference, avis, lien_vernis, id_prix_vernis, id_magasin_vernis, date_creation, valide) VALUES (NULL, '$marque', '$texture', '$couleur', '$ref', '$avis', '$lien', '$prix', '$magasin_id', '$date', 0)";
 // Récupération de l'id de ce dernier
 
     $insertVernis = mysql_query($queryVernis)or die(mysql_error());
         // Si l'insertion a fonctionné
         if ( $insertVernis == TRUE )
         {
-         echo 'true';
          $queryVernisId = "SELECT MAX(id_vernis) FROM vernis";
 
             $resultVernisId = mysql_query($queryVernisId)or die(mysql_error());

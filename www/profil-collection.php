@@ -39,19 +39,21 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
     <?php require_once("nav-profil.php");  ?>
 
   <div class="item item-body">
+
+    <a href="detail-ajout-vernis.php">
+      <img class="miniature radiusCustom" style="width:20%;" src="img/more.png">
+    </a>
+
   <?php
   while($util = mysql_fetch_array($All_util))
   {
     ?>
         <a href="detail-vernis.php?id=<?php echo $util['id_vernis'];?>">
-          <img class="miniature radiusCustom" style="width:20%;" src="<?php echo $util['lien_vernis'];?>">
+          <img class="miniature radiusCustom" src="<?php echo $util['lien_vernis'];?>">
         </a>
     <?php
   };
   ?>
-      <a href="detail-ajout-vernis.php">
-          <img class="miniature radiusCustom" style="width:20%;" src="img/more.png">
-        </a>
   </div>
 </div>
 
