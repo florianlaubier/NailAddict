@@ -31,13 +31,13 @@ $All_util = mysql_query($query) or die("Erreur SQL !<br /><br />" . $query . "<b
   ?>
   <div class="list card">
 
-    <div class="item item-avatar item-balanced">
+    <div class="item item-avatar item-positive">
       <?php
         if($_SESSION['user']['lien_photo']!=null)
           {?>
       <img src=<?php echo '"', $_SESSION['user']['lien_photo'], '"'; ?>>
       <?php } ?>
-      <h2><?php echo $_SESSION["user"]['pseudo']; ?></h2>
+      <h2 class="pseudo"><?php echo $_SESSION["user"]['pseudo']; ?></h2>
       <p><?php echo $_SESSION["user"]['description_user']; ?></p>
     </div>
 
